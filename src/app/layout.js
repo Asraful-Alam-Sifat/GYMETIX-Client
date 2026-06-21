@@ -1,6 +1,7 @@
 import { Oswald, Inter } from 'next/font/google';
 import "./globals.css";
 import NavBar from "@/components/Navbar/NavBar";
+import Footer from '@/components/Footer/Footer';
 
 
 const oswald = Oswald({
@@ -9,7 +10,7 @@ const oswald = Oswald({
   variable: '--font-oswald', 
 });
 
-// Configure the Body Font
+
 const inter = Inter({
   subsets: ['latin'],
   weight: ['400', '500'],
@@ -28,9 +29,10 @@ export default function RootLayout({ children }) {
       lang="en"
       className={`${oswald.variable} ${inter.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col bg-[#222222]">
         <NavBar />
         {children}
+        <Footer />
       </body>
     </html>
   );

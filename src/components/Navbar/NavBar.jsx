@@ -8,15 +8,17 @@ const NavBar = () => {
   useEffect(() => {
     const handleScroll = () => {
       const navbar = document.getElementById('main-navbar');
-      if (window.scrollY > 20) {
-        // Scrolled state: blurred glass effect with dark tint
-        navbar.classList.add('bg-[#222222]/70', 'backdrop-blur-md', 'shadow-sm', 'border-b', 'border-white/5');
-        navbar.classList.remove('bg-transparent');
-      } else {
-        // Initial state: fully transparent
-        navbar.classList.remove('bg-[#222222]/70', 'backdrop-blur-md', 'shadow-sm', 'border-b', 'border-white/5');
-        navbar.classList.add('bg-transparent');
-      }
+     window.addEventListener("scroll", () => {
+  if (window.scrollY > 50) {
+    // Add the specific border color immediately when active
+    navbar.classList.add("bg-black/30", "backdrop-blur-md", "shadow-sm", "border-zinc-900");
+    navbar.classList.remove("bg-transparent", "border-transparent");
+  } else {
+    // Keep it transparent when back at the top
+    navbar.classList.add("bg-transparent", "border-transparent");
+    navbar.classList.remove("bg-black/30", "backdrop-blur-md", "shadow-sm", "border-zinc-900");
+  }
+});
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -31,7 +33,7 @@ const NavBar = () => {
        
       
         {/* Navbar Start */}
-        <div className="navbar-start">
+        <div className="navbar-start mx-auto w-8/12 justify-between sm:justify-start lg:justify-center">
           <div className="dropdown">
             <div
               tabIndex={0}
@@ -40,7 +42,7 @@ const NavBar = () => {
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
+                className="h-auto w-6"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -67,6 +69,18 @@ const NavBar = () => {
               <li className="hover:bg-[#F2FD84] hover:text-[#061A19]">
                 <Link href="/community-forum">Community Forum</Link>
               </li>
+ <hr className="text-white/15"/>
+        <li className=" flex flex-col sm:hidden gap-2.5 mt-1">
+         <Link href="/login" className="text-zinc-400 px-6 py-1.5 text-base font-medium font-heading uppercase rounded-lg transition-colors duration-300 hover:text-[#F2FD84]">
+  Login
+</Link>
+
+<Link href="/signup" className="bg-[#F2FD84] border-2 border-[#E2F163] text-black px-6 py-1.5 text-base font-medium font-heading uppercase rounded-lg transition-all duration-300 hover:bg-[#222222] hover:text-white hover:border-zinc-800">
+  Get Started
+</Link>
+        </li>
+
+
             </ul>
           </div>
           <Link
@@ -84,19 +98,19 @@ const NavBar = () => {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1 text-lg font-medium font-body capitalize">
            <li>
-      <Link href="/" className="bg-transparent text-white/45 transition-colors duration-200 hover:text-[#F2FD84]/90">
+      <Link href="/" className="bg-transparent text-zinc-400 transition-colors duration-200 hover:text-[#F2FD84]/90">
         Home
       </Link>
     </li>
     
     <li>
-      <Link href="/all-classes" className="bg-transparent text-white/45 transition-colors duration-200 hover:text-[#F2FD84]/90">
+      <Link href="/all-classes" className="bg-transparent text-zinc-400 transition-colors duration-200 hover:text-[#F2FD84]/90">
         All Classes
       </Link>
     </li>
     
     <li>
-      <Link href="/community-forum" className="bg-transparent text-white/45 transition-colors duration-200 hover:text-[#F2FD84]/90">
+      <Link href="/community-forum" className="bg-transparent text-zinc-400 transition-colors duration-200 hover:text-[#F2FD84]/90">
         Community Forum
       </Link>
     </li>
@@ -104,13 +118,16 @@ const NavBar = () => {
         </div>
 
         {/* Navbar end */}
-        <div className="navbar-end">
-          <Link href="/login" className="font-heading border border-[#F2FD84]/70 px-6 py-1.5 text-[#F2FD84] bg-transparent hover:bg-[#F2FD84] hover:text-[#061A19] uppercase  rounded-lg transition-colors duration-200">
-            Login
-          </Link>
-          <Link href="/signup" className="font-heading border border-[#F2FD84]/70 px-6 py-1.5 hover:text-[#F2FD84] ml-2 bg-[#F2FD84] hover:bg-transparent text-[#061A19] uppercase rounded-lg transition-colors duration-200">
-            get started
-          </Link>
+        <div className="navbar-end hidden sm:flex">
+      
+<Link href="/login" className="text-zinc-400 px-6 py-1.5 text-base font-medium font-heading uppercase rounded-lg transition-colors duration-300 hover:text-[#F2FD84]">
+  Login
+</Link>
+
+<Link href="/signup" className="bg-[#F2FD84] border-2 border-[#E2F163] text-black px-6 py-1.5 text-base font-medium font-heading uppercase rounded-lg transition-all duration-300 hover:bg-[#222222] hover:text-white hover:border-zinc-800">
+  Get Started
+</Link>
+
         </div>
       </div>
      
