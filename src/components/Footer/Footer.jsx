@@ -15,14 +15,15 @@ const Footer = () => {
     <footer className="bg-[#222222] text-white pt-16 pb-6 border-t border-zinc-900 ">
       <div className="max-w-11/12 mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10">
         <div className="lg:col-span-2 space-y-6">
-          <div className="flex items-center gap-2 text-2xl font-black italic tracking-wider text-[#E2F163]">
+          <div className="space-y-2">
+            <div className="flex items-center gap-2 text-2xl font-black italic tracking-wider text-[#E2F163]">
             <Link
               href="/"
-              className="font-heading uppercase font-extrabold italic text-4xl flex items-center gap-0 text-[#F2FD84] bg-transparent"
+              className="font-heading uppercase font-extrabold italic text-3xl flex items-center gap-0 text-[#F2FD84] bg-transparent"
             >
               gym
               <span className="ml-1.5 ">
-                <Image src={armIcon} alt="Logo" className="w-11 h-auto" />
+                <Image src={armIcon} alt="Logo" className="w-10 h-auto" />
               </span>
               <span className="text-white">etix</span>
             </Link>
@@ -32,6 +33,7 @@ const Footer = () => {
             classes, connecting with expert trainers, and tracking your
             transformation journey.
           </p>
+          </div>
 
           <div className="flex items-center gap-3 pt-2">
             <Link
