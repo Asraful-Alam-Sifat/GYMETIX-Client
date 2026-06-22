@@ -1,7 +1,7 @@
 import { Oswald, Inter } from 'next/font/google';
 import "./globals.css";
 import NavBar from "@/components/Navbar/NavBar";
-import Footer from '@/components/Footer/Footer';
+
 
 
 const oswald = Oswald({
@@ -25,14 +25,16 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html
-      lang="en"
-      className={`${oswald.variable} ${inter.variable} h-full antialiased`}
+    <html 
+      lang="en" 
+      className={`${oswald.variable} ${inter.variable} min-h-screen antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[#222222]">
+      <body className="min-h-screen flex flex-col bg-[#222222]">
         <NavBar />
-        {children}
-        <Footer />
+        {/* Wrapping children in a flex-grow container allows your login page to dynamically stretch on tall screens */}
+        <main className="flex-grow flex flex-col w-full relative">
+          {children}
+        </main>
       </body>
     </html>
   );

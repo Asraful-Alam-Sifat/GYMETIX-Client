@@ -2,6 +2,7 @@ import Image from "next/image";
 import bannerImg from "../../assets/Image/workout-banner.png";
 import Link from "next/link";
 import Counter from '@/components/HeroBanner/StatsCounter';
+import { FaArrowRightLong } from "react-icons/fa6";
 
 
 
@@ -33,7 +34,7 @@ const HeroBanner = () => {
             >
               Achieve
             </span>{" "}
-            <span className="text-[#E2F163]">More</span> <br />
+            <span className="text-[#F2FD84]">More</span> <br />
             Than Just Fitness
           </h1>
 
@@ -43,11 +44,11 @@ const HeroBanner = () => {
           </p>
 
           <div className="flex flex-wrap gap-4 pt-2">
-            <Link href="/signup" className="font-heading bg-[#E2F163] text-black font-bold uppercase tracking-wider text-xs px-6 py-3 rounded hover:bg-white transition-colors duration-300">
-              Start Now
+            <Link href="/all-classes" className="font-heading bg-[#F2FD84] text-black font-bold uppercase tracking-wider text-xs px-6 py-3 rounded hover:bg-white transition-colors duration-300 flex items-center gap-1">
+             Explore Classes <FaArrowRightLong />
             </Link>
-            <Link href="/free-trial" className="font-heading border border-white text-white font-bold uppercase tracking-wider text-xs px-6 py-3 rounded hover:bg-white hover:text-black transition-all duration-300">
-              Join Free Trial
+            <Link href="/signup" className="font-heading border border-white text-white font-bold uppercase tracking-wider text-xs px-6 py-3 rounded hover:bg-white hover:text-black transition-all duration-300">
+              Join for Free
             </Link>
           </div>
         </div>
@@ -58,7 +59,7 @@ const HeroBanner = () => {
         <div className="max-w-7xl mx-auto px-6 md:px-10 py-5 grid grid-cols-2 md:grid-cols-4 gap-6 text-center md:text-left">
           <div>
             <h3 className="font-heading text-2xl md:text-3xl font-bold">
-              <Counter to={500}/> <span className="text-[#E2F163]">+</span>
+              <Counter to={500}/><span className="text-[#F2FD84]">+</span>
             </h3>
             <p className="font-body text-[10px] sm:text-xs font-semibold uppercase tracking-wider mt-1">
               Happy Members
@@ -69,7 +70,7 @@ const HeroBanner = () => {
           </div>
           <div>
             <h3 className="font-heading text-2xl md:text-3xl font-bold">
-              <Counter to={30} /><span className="text-[#E2F163]">+</span>
+              <Counter to={30} /><span className="text-[#F2FD84]">+</span>
             </h3>
             <p className="font-body text-[10px] sm:text-xs font-semibold uppercase tracking-wider mt-1">
               Weekly Classes
@@ -89,7 +90,7 @@ const HeroBanner = () => {
           </div>
           <div>
             <h3 className="font-heading text-2xl md:text-3xl font-bold">
-              <Counter to={99} /><span className="text-[#E2F163]">%</span>
+              <Counter to={99} /><span className="text-[#F2FD84]">%</span>
             </h3>
             <p className="font-body text-[10px] sm:text-xs font-semibold uppercase tracking-wider mt-1">
               Customer Satisfaction

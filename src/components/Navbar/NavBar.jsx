@@ -95,11 +95,11 @@ const NavBar = () => {
           </div>
           <Link
             href="/"
-            className="font-heading uppercase font-extrabold italic text-4xl flex items-center gap-0 text-[#F2FD84] bg-transparent"
+            className="font-heading uppercase font-extrabold italic text-3xl sm:text-4xl flex items-center gap-0 text-[#F2FD84] bg-transparent"
           >
             gym
             <span className="ml-1.5 ">
-              <Image src={armIcon} alt="Logo" className="w-11 h-auto" />
+              <Image src={armIcon} alt="Logo" className="w-9 sm:w-11 h-auto" />
             </span>
             <span className="text-white">etix</span>
           </Link>
