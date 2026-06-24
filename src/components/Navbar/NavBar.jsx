@@ -136,6 +136,8 @@ const NavBar = () => {
           </ul>
         </div>
 
+        
+
         {/* Navbar end */}
         <div className="navbar-end hidden sm:flex">
           <Link

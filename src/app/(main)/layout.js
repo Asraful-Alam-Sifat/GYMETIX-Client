@@ -1,5 +1,5 @@
 // import NavBar from "@/Components/NavBar/NavBar";
-// import { ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 
 import Footer from "@/components/Footer/Footer";
 
@@ -9,7 +9,7 @@ const MainLayout = ({ children }) => {
       {/* <NavBar /> */}
       {children}
        <Footer />
-      {/* <ToastContainer position="bottom-center" autoClose={1000} /> */}
+      <ToastContainer position="bottom-center" autoClose={1000} />
     </div>
   );
 };
