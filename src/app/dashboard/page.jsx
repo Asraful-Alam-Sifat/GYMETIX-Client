@@ -1,41 +1,92 @@
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
+import clientPromise from "@/lib/mongodb";
+import Link from "next/link";
 
-const DashboardPage = async () => {
+export default async function DashboardPage() {
   const session = await auth.api.getSession({ headers: await headers() });
 
-  if (!session) redirect("/login");
+  if (!session) {
+    redirect("/login");
+  }
 
-  const { user } = session;
+  const userRole = session.user.role ?? "user";
 
   return (
-    <div className="min-h-screen bg-[#1d1c1c] text-white flex flex-col items-center justify-center gap-6 px-6">
-      <h1 className="font-heading text-4xl font-extrabold uppercase text-[#F2FD84]">
-        Dashboard
-      </h1>
-      <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 w-full max-w-md space-y-3">
-        <p className="text-zinc-400 text-sm uppercase tracking-wider font-bold">
-          Logged in as
+    <div className="min-h-screen bg-[#1d1c1c] text-white px-6 py-20">
+      {/* --- SHARED DASHBOARD HEADER --- */}
+      <div className="border-b border-zinc-800 pb-6 mb-8">
+        <h1 className="text-4xl font-extrabold uppercase text-[#F2FD84]">
+          Dashboard
+        </h1>
+        <p className="text-zinc-400 mt-2">
+          Welcome back,{" "}
+          <span className="text-white font-semibold">{session.user.name}</span>{" "}
+          ({userRole})
         </p>
-        <p className="text-white font-semibold text-lg">{user.name}</p>
-        <p className="text-zinc-400 text-sm">{user.email}</p>
-        <span className="inline-block bg-[#F2FD84]/10 text-[#F2FD84] border border-[#F2FD84]/20 rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider">
-          Role: {user.role ?? "user"}
-        </span>
       </div>
 
-      {/* Only admins see this */}
-      {user.role === "admin" && (
-        <a
-          href="/admin"
-          className="bg-[#F2FD84] text-black font-extrabold uppercase px-6 py-2.5 rounded-lg tracking-wider text-sm hover:bg-zinc-950 hover:text-[#F2FD84] hover:border hover:border-[#F2FD84]/75 transition-all"
-        >
-          Go to Admin Panel
-        </a>
+      {/*  ADMIN CONTROL PANEL */}
+      {userRole === "admin" && <AdminUserListSection />}
+
+      {/*  TRAINER CONTROL PANEL */}
+      {userRole === "trainer" && (
+        <div className="p-6 bg-zinc-900 border border-zinc-800 rounded-xl">
+          <h2 className="text-xl font-bold text-white mb-2">
+            Trainer Management Panel
+          </h2>
+          <p className="text-zinc-400">
+            Manage routines, client assignments, and workout schedules here.
+          </p>
+        </div>
+      )}
+
+      {/*  STANDARD MEMBER VIEW */}
+      {userRole === "user" && (
+        <div className="p-6 bg-zinc-900 border border-zinc-800 rounded-xl">
+          <h2 className="text-xl font-bold text-white mb-2">
+            My Workout Workspace
+          </h2>
+          <p className="text-zinc-400">
+            Track your progress, view assigned trainers, and log daily
+            activities.
+          </p>
+        </div>
       )}
     </div>
   );
-};
+}
 
-export default DashboardPage;
+/* Helper Component
+ */
+async function AdminUserListSection() {
+  const client = await clientPromise;
+  const users = await client
+    .db("gymetix")
+    .collection("user")
+    .find({}, { projection: { passwordHash: 0 } })
+    .toArray();
+
+  return (
+    <div className="space-y-4 max-w-3xl">
+      <h2 className="text-2xl font-bold text-white mb-4">
+        System User Administration
+      </h2>
+      {users.map((u) => (
+        <div
+          key={u._id.toString()}
+          className="bg-zinc-900 border border-zinc-800 rounded-xl px-5 py-4 flex items-center justify-between"
+        >
+          <div>
+            <p className="text-white font-semibold">{u.name}</p>
+            <p className="text-zinc-400 text-sm">{u.email}</p>
+          </div>
+          <span className="bg-zinc-800 text-zinc-300 text-xs font-bold uppercase px-3 py-1 rounded-full">
+            {u.role ?? "user"}
+          </span>
+        </div>
+      ))}
+    </div>
+  );
+}

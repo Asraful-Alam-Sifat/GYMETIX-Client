@@ -1,45 +1,28 @@
 import { NextResponse } from "next/server";
-import { auth } from "@/lib/auth";
 
-// Map route prefixes → which roles can access them
-const ROLE_ROUTES = {
-  "/admin":     ["admin"],
-  "/trainer":   ["admin", "trainer"],
-  "/dashboard": ["admin", "trainer", "user"],
-};
-
-export async function middleware(req) {
+export function middleware(req) {
   const pathname = req.nextUrl.pathname;
 
-  // Find if this path matches a protected route
-  const matchedRoute = Object.keys(ROLE_ROUTES).find((route) =>
-    pathname.startsWith(route)
-  );
+  const sessionCookie =
+    req.cookies.get("better-auth.session_token") ||
+    req.cookies.get("__secure-next-auth.session-token");
 
-  // Not a protected route — let it through
-  if (!matchedRoute) return NextResponse.next();
-
-  // Read session from Better Auth
-  const session = await auth.api.getSession({ headers: req.headers });
-
-  // No session → redirect to login
-  if (!session) {
+  if (pathname.startsWith("/dashboard") && !sessionCookie) {
     const loginUrl = new URL("/login", req.url);
     loginUrl.searchParams.set("callbackUrl", pathname);
     return NextResponse.redirect(loginUrl);
   }
 
-  const userRole = session.user.role ?? "user";
-  const allowedRoles = ROLE_ROUTES[matchedRoute];
-
-  // Role not allowed → redirect to unauthorized
-  if (!allowedRoles.includes(userRole)) {
-    return NextResponse.redirect(new URL("/unauthorized", req.url));
+  if (
+    (pathname.startsWith("/login") || pathname.startsWith("/signup")) &&
+    sessionCookie
+  ) {
+    return NextResponse.redirect(new URL("/dashboard", req.url));
   }
 
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/dashboard/:path*", "/admin/:path*", "/trainer/:path*"],
+  matcher: ["/dashboard/:path*", "/login", "/signup"],
 };
