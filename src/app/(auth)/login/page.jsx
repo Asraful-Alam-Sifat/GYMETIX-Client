@@ -1,15 +1,19 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { signIn } from "@/lib/auth-client";
 import Image from "next/image";
 import Link from "next/link";
-import bannerImg from "../../../assets/Image/workoutsformen.png";
+import bannerImg from "../../../assets/Image/bodyflexingmen.png";
 import armIcon from "../../../assets/Icons/arm-flex-icon.png";
 
 const LoginPage = () => {
-  const router = useRouter();
+const router = useRouter();
+  const searchParams = useSearchParams(); 
+ 
+  const callbackUrl = searchParams.get("callbackUrl") || "/dashboard";
+
   const [form, setForm] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -26,7 +30,7 @@ const LoginPage = () => {
     const { error: signInError } = await signIn.email({
       email: form.email,
       password: form.password,
-      callbackURL: "/dashboard",
+     
     });
 
     if (signInError) {
@@ -35,7 +39,9 @@ const LoginPage = () => {
       return;
     }
 
-    router.push("/dashboard");
+   
+    router.push(callbackUrl);
+    router.refresh();
   };
 
   return (
