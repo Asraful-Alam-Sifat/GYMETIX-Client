@@ -3,7 +3,6 @@ import { NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
 
 export async function GET(req) {
-  // Read the session from the incoming request cookies
   const session = await auth.api.getSession({ headers: req.headers });
 
   if (!session) {

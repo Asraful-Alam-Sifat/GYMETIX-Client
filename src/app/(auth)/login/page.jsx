@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import LoginForm from "@/components/Login/LoginForm"; // 👈 Import the Client Form component
+import LoginForm from "@/components/Login/LoginForm";
 import bannerImg from "../../../assets/Image/bodyflexingmen.png";
 import armIcon from "../../../assets/Icons/arm-flex-icon.png";
 
@@ -54,12 +54,13 @@ export default function LoginPage() {
         <div className="relative flex justify-center items-center w-full group">
           <div className="absolute hidden md:block w-[102%] h-[110%] bg-[#e2ff3b]/10 rounded-box blur-[30px] pointer-events-none z-0 transition-all duration-500 group-hover:scale-105 group-hover:bg-[#e2ff3b]/15" />
 
-          {/* ✅ Safely wrapper your Client Component with Suspense */}
-          <Suspense fallback={
-            <div className="w-full max-w-md bg-zinc-950/75 border border-zinc-800/80 p-8 rounded-2xl text-center text-zinc-400">
-              Loading form systems...
-            </div>
-          }>
+          <Suspense
+            fallback={
+              <div className="w-full max-w-md bg-zinc-950/75 border border-zinc-800/80 p-8 rounded-2xl text-center text-zinc-400">
+                Loading form systems...
+              </div>
+            }
+          >
             <LoginForm />
           </Suspense>
         </div>
@@ -67,13 +68,22 @@ export default function LoginPage() {
 
       {/* BOTTOM LINKS */}
       <div className="relative z-20 flex justify-center gap-6 text-[11px] font-bold tracking-wider uppercase text-zinc-500 pt-4 pb-2">
-        <Link href="/" className="font-body hover:text-zinc-300 transition-colors">
+        <Link
+          href="/"
+          className="font-body hover:text-zinc-300 transition-colors"
+        >
           Home
         </Link>
-        <Link href="#" className="font-body hover:text-zinc-300 transition-colors">
+        <Link
+          href="#"
+          className="font-body hover:text-zinc-300 transition-colors"
+        >
           News
         </Link>
-        <Link href="#" className="font-body hover:text-zinc-300 transition-colors">
+        <Link
+          href="#"
+          className="font-body hover:text-zinc-300 transition-colors"
+        >
           Privacy Policy
         </Link>
       </div>

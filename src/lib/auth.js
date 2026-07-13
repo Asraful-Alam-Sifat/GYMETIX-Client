@@ -13,6 +13,20 @@ export const auth = betterAuth({
     minPasswordLength: 6,
   },
 
+  socialProviders: {
+    google: {
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    },
+  },
+
+  account: {
+    accountLinking: {
+      enabled: true,
+      trustedProviders: ["google"],
+    },
+  },
+
   session: {
     expiresIn: 60 * 60 * 24 * 7,
     updateAge: 60 * 60 * 24,
@@ -33,6 +47,15 @@ export const auth = betterAuth({
         defaultValue: "user",
         required: false,
       },
+
+      firstLogin: {
+        type: "boolean",
+        defaultValue: true,
+        required: false,
+      },
     },
   },
+
+  secret: process.env.BETTER_AUTH_SECRET,
+  baseURL: process.env.BETTER_AUTH_URL || "http://localhost:3000",
 });

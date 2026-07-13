@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { useEffect } from "react";
 import { useMotionValue, useTransform, animate, motion } from "framer-motion";
 
@@ -7,9 +7,9 @@ const Counter = ({ from = 0, to, duration = 2 }) => {
   const rounded = useTransform(count, (latest) => Math.round(latest));
 
   useEffect(() => {
-    const controls = animate(count, to, { 
+    const controls = animate(count, to, {
       duration: duration,
-      ease: "easeOut" 
+      ease: "easeOut",
     });
 
     return () => controls.stop();

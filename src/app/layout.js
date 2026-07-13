@@ -1,22 +1,19 @@
-import { Oswald, Inter } from 'next/font/google';
+import { Oswald, Inter } from "next/font/google";
 import "./globals.css";
 import NavBar from "@/components/Navbar/NavBar";
-
-
+import { ToastContainer } from "react-toastify";
 
 const oswald = Oswald({
-  subsets: ['latin'],
-  weight: ['700'],
-  variable: '--font-oswald', 
+  subsets: ["latin"],
+  weight: ["700"],
+  variable: "--font-oswald",
 });
-
 
 const inter = Inter({
-  subsets: ['latin'],
-  weight: ['400', '500'],
-  variable: '--font-inter', 
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-inter",
 });
-
 
 export const metadata = {
   title: "Create Next App",
@@ -25,16 +22,21 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html 
-      lang="en" 
+    <html
+      lang="en"
       className={`${oswald.variable} ${inter.variable} min-h-screen antialiased`}
     >
       <body className="min-h-screen flex flex-col bg-[#222222]">
         <NavBar />
-        {/* Wrapping children in a flex-grow container allows your login page to dynamically stretch on tall screens */}
+
         <main className="flex-grow flex flex-col w-full relative">
           {children}
         </main>
+        <ToastContainer
+          position="bottom-center"
+          autoClose={3000}
+          theme="dark"
+        />
       </body>
     </html>
   );

@@ -1,19 +1,32 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { signIn } from "@/lib/auth-client";
+import { toast } from "react-toastify";
 import Link from "next/link";
 
 export default function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  
+
   const callbackUrl = searchParams.get("callbackUrl") || "/dashboard";
 
   const [form, setForm] = useState({ email: "", password: "" });
-  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const errorParam = searchParams.get("error");
+    if (errorParam === "account_not_linked") {
+      toast.error(
+        "This email is already associated with a password account. Please log in with email and password first.",
+      );
+    }
+
+    return () => {
+      toast.dismiss();
+    };
+  }, [searchParams]);
 
   const handleChange = (e) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -22,21 +35,51 @@ export default function LoginForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setError("");
 
-    const { error: signInError } = await signIn.email({
-      email: form.email,
-      password: form.password,
-    });
+    try {
+      const res = await signIn.email({
+        email: form.email,
+        password: form.password,
+      });
 
-    if (signInError) {
-      setError(signInError.message ?? "Login failed. Check your credentials.");
+      if (res?.error) {
+        toast.error(res.error.message || "Failed to log in.");
+        setLoading(false);
+        return;
+      }
+
+      toast.success(" Redirecting...");
       setLoading(false);
-      return;
+      router.push(callbackUrl);
+      router.refresh();
+    } catch (err) {
+      toast.error(err.message || "An unexpected error occurred.");
+    } finally {
+      setLoading(false);
     }
+  };
 
-    router.push(callbackUrl);
-    router.refresh();
+  const handleGoogleSignIn = async () => {
+    setLoading(true);
+    try {
+      const absoluteCallbackUrl = `${window.location.origin}${callbackUrl}`;
+
+      const res = await signIn.social({
+        provider: "google",
+        callbackURL: absoluteCallbackUrl,
+        errorCallbackURL: `${window.location.origin}/login?error=account_not_linked`,
+      });
+
+      if (res?.error) {
+        toast.error(res.error.message || "Failed to log in with Google.");
+      }
+    } catch (err) {
+      toast.error(
+        err.message || "An error occurred during Google authentication.",
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -44,12 +87,6 @@ export default function LoginForm() {
       <h2 className="font-heading text-center text-3xl lg:text-4xl font-extrabold uppercase tracking-wide text-zinc-100">
         Login
       </h2>
-
-      {error && (
-        <div className="text-red-400 text-xs font-semibold text-center bg-red-950/40 border border-red-800/50 rounded-lg px-3 py-2">
-          {error}
-        </div>
-      )}
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="space-y-1.5">
@@ -106,13 +143,12 @@ export default function LoginForm() {
         </span>
       </div>
 
-      {/* GOOGLE */}
+      {/* GOOGLE BUTTON */}
       <button
         type="button"
-        onClick={() =>
-          signIn.social({ provider: "google", callbackURL: "/dashboard" })
-        }
-        className="font-body w-full flex items-center justify-center gap-3 bg-zinc-950 border border-zinc-800 hover:bg-zinc-900 transition-colors py-3 rounded-lg text-sm font-semibold tracking-wide text-zinc-300"
+        onClick={handleGoogleSignIn}
+        disabled={loading}
+        className="font-body w-full flex items-center justify-center gap-3 bg-zinc-950 border border-zinc-800 hover:bg-zinc-900 transition-colors py-3 rounded-lg text-sm font-semibold tracking-wide text-zinc-300 disabled:opacity-50 disabled:cursor-not-allowed"
       >
         <svg className="w-4 h-4" viewBox="0 0 24 24">
           <path
@@ -120,7 +156,7 @@ export default function LoginForm() {
             d="M12.24 10.285V14.4h6.887c-.275 1.565-1.88 4.604-6.887 4.604-4.33 0-7.866-3.577-7.866-8s3.536-8 7.866-8c2.46 0 4.105 1.025 5.047 1.926l3.227-3.103C18.435 1.21 15.62 0 12.24 0 5.58 0 0 5.37 0 12s5.58 12 12.24 12c6.96 0 11.57-4.854 11.57-11.77 0-.795-.085-1.4-.195-1.945H12.24z"
           />
         </svg>
-        Sign in with Google
+        {loading ? "Connecting..." : "Sign in with Google"}
       </button>
 
       <p className="font-body text-center text-xs text-zinc-500 font-bold tracking-wide pt-1">
