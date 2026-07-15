@@ -117,83 +117,80 @@ const NavBar = () => {
               </li>
               <hr className="text-white/15" />
               
-              {/* Conditional Mobile Auth Section */}
-              <li className="flex flex-col sm:hidden gap-2.5 mt-1">
-                {isPending ? (
-                  <span className="text-zinc-500 text-sm animate-pulse px-6 py-1.5">Loading...</span>
-                ) : user ? (
-                  <>
-                    <div className="space-y-0 flex flex-col">
-                      <div className="font-heading w-full flex flex-start text-white/95 text-base font-semibold ">
-                      {user.name || "User"}
-                    </div>
-                    <p className="font-body text-zinc-500 text-xs truncate lowercase">
-                      {user.email}
-                    </p>
-                    </div>
-                 <ul className="space-y-0 mb-0 border-none">
-                    <li>
-                      <Link 
-                        href="/dashboard" 
-                        onClick={() => setDropdownOpen(false)}
-                        className="font-body flex items-center gap-2 px-3 py-2 rounded-sm text-[12px] text-[#bebeca] hover:text-[#F2FD84]/85 hover:bg-white/5 transition-colors duration-150 font-medium"
-                      >
-                        <RxDashboard />
-                        Dashboard
-                      </Link>
-                    </li>
-                    <li>
-                         <Link
-                  href="/profile"
-                   className="font-body flex items-center gap-2 px-3 py-2 rounded-sm text-[12px] text-[#bebeca] hover:text-[#F2FD84]/85 hover:bg-white/5 transition-colors duration-150 font-medium"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <circle cx="12" cy="8" r="4" />
-                    <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
-                  </svg>
-                  Profile
-                </Link>
-                    </li>
-                    <li>
-                      <button 
-                        onClick={handleLogout}
-                        className="font-body w-full flex items-center gap-2 px-3 py-2 text-[12px] text-[#bebeca] hover:text-red-400 hover:bg-red-500/10 rounded-sm transition-colors duration-150 text-left font-medium"
-                      >
-                        <FaArrowRightFromBracket />
-                        Log out
-                      </button>
-                    </li>
-                   
-                 </ul>
-                 
-                  </>
-                ) : (
-                  <>
-                    <Link
-                      href="/login"
-                      className="text-zinc-400 px-6 py-1.5 text-base font-medium font-heading uppercase rounded-lg transition-colors duration-300 hover:text-[#F2FD84]"
-                    >
-                      Login
-                    </Link>
-                    <Link
-                      href="/signup"
-                      className="bg-[#F2FD84] border-2 border-[#E2F163] text-black px-6 py-1.5 text-base font-medium font-heading uppercase rounded-lg transition-all duration-300 hover:bg-[#222222] hover:text-white hover:border-[#E2F163]/75"
-                    >
-                      Get Started
-                    </Link>
-                  </>
-                )}
-              </li>
+             {/* Conditional Mobile Auth Section */}
+<li className="flex flex-col sm:hidden gap-2.5 mt-1 p-0">
+  {isPending ? (
+    <span className="text-zinc-500 text-sm animate-pulse px-6 py-1.5">Loading...</span>
+  ) : user ? (
+    <>
+      {/* User Info Container - aligned left */}
+      <div className="space-y-0 flex flex-col px-3">
+        <div className="font-heading w-full flex flex-start text-[#F2FD84] text-base font-semibold">
+          {user.name || "User"}
+        </div>
+        <p className="font-body text-zinc-500 text-xs truncate lowercase">
+          {user.email}
+        </p>
+      </div>
+
+      {/* Changed <ul> to a clean flex <div> to eliminate DaisyUI menu indents */}
+      <div className="flex flex-col space-y-0 mb-0 w-full">
+        <Link 
+          href="/dashboard" 
+          onClick={() => setDropdownOpen(false)}
+          className="font-body flex items-center gap-2 px-3 py-2 rounded-sm text-[12px] text-[#bebeca] hover:text-[#F2FD84]/85 hover:bg-white/5 transition-colors duration-150 font-medium w-full"
+        >
+          <RxDashboard />
+          Dashboard
+        </Link>
+        
+        <Link
+          href="/profile"
+          className="font-body flex items-center gap-2 px-3 py-2 rounded-sm text-[12px] text-[#bebeca] hover:text-[#F2FD84]/85 hover:bg-white/5 transition-colors duration-150 font-medium w-full"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <circle cx="12" cy="8" r="4" />
+            <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+          </svg>
+          Profile
+        </Link>
+
+        <button 
+          onClick={handleLogout}
+          className="font-body w-full flex items-center gap-2 px-3 py-2 text-[12px] text-[#bebeca] hover:text-red-400 hover:bg-red-500/10 rounded-sm transition-colors duration-150 text-left font-medium"
+        >
+          <FaArrowRightFromBracket />
+          Log out
+        </button>
+      </div>
+    </>
+  ) : (
+    <>
+      <Link
+        href="/login"
+        className="text-zinc-400 px-6 py-1.5 text-base font-medium font-heading uppercase rounded-lg transition-colors duration-300 hover:text-[#F2FD84]"
+      >
+        Login
+      </Link>
+      <Link
+        href="/signup"
+        className="bg-[#F2FD84] border-2 border-[#E2F163] text-black px-6 py-1.5 text-base font-medium font-heading uppercase rounded-lg transition-all duration-300 hover:bg-[#222222] hover:text-white hover:border-[#E2F163]/75"
+      >
+        Get Started
+      </Link>
+    </>
+  )}
+</li>
             </ul>
           </div>
           
