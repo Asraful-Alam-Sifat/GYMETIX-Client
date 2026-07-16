@@ -3,37 +3,33 @@ import Image from "next/image";
 import Link from "next/link";
 import armIcon from "../../assets/Icons/arm-flex-icon.png";
 import { useEffect, useState, useRef } from "react";
-// Import your Better Auth client instance (adjust path if your client is elsewhere)
 import { authClient } from "@/lib/auth-client";
 import { FaArrowRightFromBracket } from "react-icons/fa6";
 import { RxDashboard } from "react-icons/rx";
 
 const NavBar = () => {
-  // 1. Get session state from Better Auth client hook
   const { data: session, isPending } = authClient.useSession();
   const user = session?.user;
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
 
-  // 2. Handle Logout action using Better Auth client actions
   const handleLogout = async () => {
-  try {
-    await authClient.signOut({
-      fetchOptions: {
-        onSuccess: () => {
-          // 1. Clear the welcome toast flag so the next login triggers it again
-          localStorage.removeItem("gymetix_welcomed");
+    try {
+      await authClient.signOut({
+        fetchOptions: {
+          onSuccess: () => {
+            localStorage.removeItem("gymetix_welcomed");
 
-          setDropdownOpen(false);
-          window.location.reload(); // Optional: Refresh to clear context states cleanly
+            setDropdownOpen(false);
+            window.location.reload();
+          },
         },
-      },
-    });
-  } catch (error) {
-    console.error("Error signing out: ", error);
-  }
-};
+      });
+    } catch (error) {
+      console.error("Error signing out: ", error);
+    }
+  };
 
   // Close profile dropdown when clicking outside
   useEffect(() => {
@@ -138,7 +134,6 @@ const NavBar = () => {
                       </p>
                     </div>
 
-                    {/* Changed <ul> to a clean flex <div> to eliminate DaisyUI menu indents */}
                     <div className="flex flex-col space-y-0 mb-0 w-full">
                       <Link
                         href="/dashboard"
@@ -245,10 +240,8 @@ const NavBar = () => {
         {/* Navbar End (Desktop Authentication) */}
         <div className="navbar-end hidden sm:flex">
           {isPending ? (
-            /* Prevent UI shifting during session handshake check */
             <div className="w-24 h-8 bg-zinc-800/50 animate-pulse rounded-lg" />
           ) : user ? (
-            /* IF LOGGED IN: Show Better Auth User Profile Dropdown */
             <div className="relative" ref={dropdownRef}>
               <button
                 onClick={() => setDropdownOpen(!dropdownOpen)}

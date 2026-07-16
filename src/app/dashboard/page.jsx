@@ -20,6 +20,7 @@ export default async function DashboardPage() {
     <>
       <DashboardToast />
       <div className="min-h-screen bg-[#1d1c1c] text-white px-6 py-20">
+        
         {/* --- SHARED DASHBOARD HEADER --- */}
         <div className="border-b border-zinc-800 pb-6 mb-8">
           <h1 className="text-4xl font-extrabold uppercase text-[#F2FD84]">

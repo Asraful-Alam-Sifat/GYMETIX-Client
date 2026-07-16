@@ -1,7 +1,7 @@
 import Image from "next/image";
-import bannerImg from "../../assets/Image/workout-banner.png";
+import bannerImg from "@/assets/Image/workout-banner.png";
 import Link from "next/link";
-import Counter from "@/components/HeroBanner/StatsCounter";
+import Counter from "@/components/Home/HeroBanner/StatsCounter";
 import { FaArrowRightLong } from "react-icons/fa6";
 
 const HeroBanner = () => {
