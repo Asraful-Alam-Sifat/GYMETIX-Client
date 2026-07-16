@@ -1,8 +1,10 @@
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
-import clientPromise from "@/lib/mongodb";
 import DashboardToast from "@/components/Dashboard/DashboardToast";
+import AdminControlPanel from "@/components/Dashboard/Admin/AdminControlPanel";
+import TrainerControlPanel from "@/components/Dashboard/Trainer/TrainerControlPanel";
+import UserControlPanel from "@/components/Dashboard/User/UserControlPanel";
 
 export default async function DashboardPage() {
   const session = await auth.api.getSession({ headers: await headers() });
@@ -33,65 +35,15 @@ export default async function DashboardPage() {
         </div>
 
         {/*  ADMIN CONTROL PANEL */}
-        {userRole === "admin" && <AdminUserListSection />}
+        {userRole === "admin" && <AdminControlPanel/>}
 
         {/*  TRAINER CONTROL PANEL */}
-        {userRole === "trainer" && (
-          <div className="p-6 bg-zinc-900 border border-zinc-800 rounded-xl">
-            <h2 className="text-xl font-bold text-white mb-2">
-              Trainer Management Panel
-            </h2>
-            <p className="text-zinc-400">
-              Manage routines, client assignments, and workout schedules here.
-            </p>
-          </div>
-        )}
+        {userRole === "trainer" && <TrainerControlPanel/>}
 
         {/*  STANDARD MEMBER VIEW */}
-        {userRole === "user" && (
-          <div className="p-6 bg-zinc-900 border border-zinc-800 rounded-xl">
-            <h2 className="text-xl font-bold text-white mb-2">
-              My Workout Workspace
-            </h2>
-            <p className="text-zinc-400">
-              Track your progress, view assigned trainers, and log daily
-              activities.
-            </p>
-          </div>
-        )}
+        {userRole === "user" && <UserControlPanel/>}
       </div>
     </>
   );
 }
 
-/* Helper Component */
-async function AdminUserListSection() {
-  const client = await clientPromise;
-  const users = await client
-    .db("gymetix")
-    .collection("user")
-    .find({}, { projection: { passwordHash: 0 } })
-    .toArray();
-
-  return (
-    <div className="space-y-4 max-w-3xl">
-      <h2 className="text-2xl font-bold text-white mb-4">
-        System User Administration
-      </h2>
-      {users.map((u) => (
-        <div
-          key={u._id.toString()}
-          className="bg-zinc-900 border border-zinc-800 rounded-xl px-5 py-4 flex items-center justify-between"
-        >
-          <div>
-            <p className="text-white font-semibold">{u.name}</p>
-            <p className="text-zinc-400 text-sm">{u.email}</p>
-          </div>
-          <span className="bg-zinc-800 text-zinc-300 text-xs font-bold uppercase px-3 py-1 rounded-full">
-            {u.role ?? "user"}
-          </span>
-        </div>
-      ))}
-    </div>
-  );
-}
