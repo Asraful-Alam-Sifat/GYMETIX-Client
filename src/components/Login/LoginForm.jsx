@@ -156,7 +156,7 @@ export default function LoginForm() {
             d="M12.24 10.285V14.4h6.887c-.275 1.565-1.88 4.604-6.887 4.604-4.33 0-7.866-3.577-7.866-8s3.536-8 7.866-8c2.46 0 4.105 1.025 5.047 1.926l3.227-3.103C18.435 1.21 15.62 0 12.24 0 5.58 0 0 5.37 0 12s5.58 12 12.24 12c6.96 0 11.57-4.854 11.57-11.77 0-.795-.085-1.4-.195-1.945H12.24z"
           />
         </svg>
-        {loading ? "Connecting..." : "Sign in with Google"}
+        {loading ? "Connecting..." : "Continue with Google"}
       </button>
 
       <p className="font-body text-center text-xs text-zinc-500 font-bold tracking-wide pt-1">
