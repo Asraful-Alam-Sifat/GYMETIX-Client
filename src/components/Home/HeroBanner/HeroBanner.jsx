@@ -13,7 +13,7 @@ const HeroBanner = () => {
           src={bannerImg}
           alt="Hero Banner"
           fill
-          priority
+          
           className="object-cover object-right md:object-center"
         />
 
