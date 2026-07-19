@@ -93,17 +93,22 @@ const FeaturedClasses = () => {
       <section className="sm:max-w-10/12 mx-auto px-6 relative  z-20">
         {/* Section Header with Navigation Arrows */}
         <div className="flex flex-col mb-4">
-          <div className="w-full flex justify-center flex-col">
-            <h2 className="font-heading text-3xl md:text-5xl font-black uppercase tracking-tight text-center text-white">
-              FEATURED{" "}
-              <span className="text-[#F2FD84] bg-clip-text">CLASSES</span>
-            </h2>
+          <div className="w-full flex justify-center flex-col text-center mb-16">
+  {/* Small Slogan/Category Label */}
+  <p className="font-heading text-[#F2FD84] text-xs font-bold uppercase tracking-[0.2em] mb-4">
+    Top Sessions
+  </p>
 
-            <p className="font-body text-gray-400 mt-3 mx-auto text-sm md:text-base max-w-xl font-light leading-relaxed">
-              Our highly rated and most booked sessions designed to push your
-              limits.
-            </p>
-          </div>
+  {/* Main Title */}
+  <h2 className="font-heading text-3xl md:text-5xl font-black uppercase tracking-tight text-white mb-6">
+    Featured <span className="text-[#F2FD84]">Classes</span>
+  </h2>
+
+  {/* Description */}
+  <p className="font-body text-gray-400 mx-auto text-sm md:text-base max-w-xl font-light leading-relaxed">
+    Our highly rated and most booked sessions designed to push your limits.
+  </p>
+</div>
           <Link
             href="/all-classes"
             className="font-heading flex items-center gap-1 border p-2 rounded-box text-xs font-normal uppercase tracking-wider text-[#F2FD84]/80 hover:text-black hover:bg-[#F2FD84] transition-colors duration-300 self-end mt-6"
