@@ -38,7 +38,6 @@ const FeaturedClasses = () => {
     fetchFeaturedClasses();
   }, [baseUrl]);
 
-
   useEffect(() => {
     const handleResize = () => {
       if (containerRef.current) {
@@ -51,7 +50,6 @@ const FeaturedClasses = () => {
         const totalGapsWidth = (cardsToShow - 1) * gap;
         const cardWidth = (containerWidth - totalGapsWidth) / cardsToShow;
 
-        
         setSlideDistance(cardWidth + gap);
       }
     };
@@ -62,8 +60,6 @@ const FeaturedClasses = () => {
   }, [classes]);
 
   const maxIndex = Math.max(0, classes.length - visibleCards);
-
-  
 
   if (loading) {
     return (
@@ -94,21 +90,22 @@ const FeaturedClasses = () => {
         {/* Section Header with Navigation Arrows */}
         <div className="flex flex-col mb-4">
           <div className="w-full flex justify-center flex-col text-center mb-16">
-  {/* Small Slogan/Category Label */}
-  <p className="font-heading text-[#F2FD84] text-xs font-bold uppercase tracking-[0.2em] mb-4">
-    Top Sessions
-  </p>
+            {/* Small Slogan/Category Label */}
+            <p className="font-heading text-[#F2FD84] text-xs font-bold uppercase tracking-[0.2em] mb-4">
+              Top Sessions
+            </p>
 
-  {/* Main Title */}
-  <h2 className="font-heading text-3xl md:text-5xl font-black uppercase tracking-tight text-white mb-6">
-    Featured <span className="text-[#F2FD84]">Classes</span>
-  </h2>
+            {/* Main Title */}
+            <h2 className="font-heading text-3xl md:text-5xl font-black uppercase tracking-tight text-white mb-6">
+              Featured <span className="text-[#F2FD84]">Classes</span>
+            </h2>
 
-  {/* Description */}
-  <p className="font-body text-gray-400 mx-auto text-sm md:text-base max-w-xl font-light leading-relaxed">
-    Our highly rated and most booked sessions designed to push your limits.
-  </p>
-</div>
+            {/* Description */}
+            <p className="font-body text-gray-400 mx-auto text-sm md:text-base max-w-xl font-light leading-relaxed">
+              Our highly rated and most booked sessions designed to push your
+              limits.
+            </p>
+          </div>
           <Link
             href="/all-classes"
             className="font-heading flex items-center gap-1 border p-2 rounded-box text-xs font-normal uppercase tracking-wider text-[#F2FD84]/80 hover:text-black hover:bg-[#F2FD84] transition-colors duration-300 self-end mt-6"
@@ -132,7 +129,7 @@ const FeaturedClasses = () => {
             {classes.map((cls) => (
               <motion.div
                 key={cls._id}
-                className="w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] shrink-0 group rounded-xl p-[1px] bg-gradient-to-t from-gray-500 via-gray-900/40 to-transparent hover:from-[#F2FD84]/40 hover:via-[#F2FD84]/50 hover:to-transparent shadow-lg hover:shadow-[#F2FD84]/10 transition-all duration-300 select-none"
+                className="w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] shrink-0 group rounded-xl p-px bg-linear-to-t from-gray-500 via-gray-900/40 to-transparent hover:from-[#F2FD84]/40 hover:via-[#F2FD84]/50 hover:to-transparent shadow-lg hover:shadow-[#F2FD84]/10 transition-all duration-300 select-none"
                 whileHover={{ y: -6 }}
               >
                 {/* Inner Card Container  */}
@@ -165,7 +162,7 @@ const FeaturedClasses = () => {
                       </Link>
                     </div>
 
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-0" />
+                    <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/20 to-transparent z-0" />
 
                     {/* Category Badge */}
                     <span className="font-heading absolute top-3 left-3 bg-[#ff1e1e] text-white text-[10px] font-bold px-2.5 py-1 rounded-sm uppercase tracking-wider z-10">
@@ -179,7 +176,7 @@ const FeaturedClasses = () => {
                   </div>
 
                   {/* Card Content */}
-                  <div className="p-5 flex-grow flex flex-col justify-between bg-black/20 relative z-20">
+                  <div className="p-5 grow flex flex-col justify-between bg-black/20 relative z-20">
                     <div>
                       {/* Main Title */}
                       <Link

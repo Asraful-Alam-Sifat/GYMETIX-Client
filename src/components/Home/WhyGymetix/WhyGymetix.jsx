@@ -1,7 +1,7 @@
-"client"
+"client";
 import { Check } from "lucide-react";
 import Image from "next/image";
-import menWorkoutWithRope from "@/assets/Image/men-workout-with-rope.png"
+import menWorkoutWithRope from "@/assets/Image/men-workout-with-rope.png";
 
 const features = [
   {
@@ -63,14 +63,10 @@ export default function WhyGymetix() {
           <div
             className="absolute -inset-3 -z-10 rounded-2xl bg-[#F2FD84]/10"
             style={{
-              clipPath:
-                "polygon(0 0, 100% 0, 100% 85%, 85% 100%, 0 100%)",
+              clipPath: "polygon(0 0, 100% 0, 100% 85%, 85% 100%, 0 100%)",
             }}
           />
-          <div
-            className="relative aspect-4/5 overflow-hidden rounded-2xl border border-[#222222] "
-            
-          >
+          <div className="relative aspect-4/5 overflow-hidden rounded-2xl border border-[#222222] ">
             <Image
               src={menWorkoutWithRope}
               alt="Member training at Gymetix"
@@ -78,19 +74,20 @@ export default function WhyGymetix() {
               className="object-cover"
             />
 
-                {/* gradient overlays to match HowItWorks theme  */}
+            {/* gradient overlays  */}
             <div className="absolute inset-0 bg-linear-to-r from-[#222223] via-[#222223]/20 to-[#222223]/20 mix-blend-multiply" />
-        <div className="absolute inset-0 bg-neutral-900/40 backdrop-grayscale" />
+            <div className="absolute inset-0 bg-neutral-900/40 backdrop-grayscale" />
 
             {/* Angled Corner */}
-        <div className="absolute -top-25 left-1 w-0 h-95 border-30 border-[#F2FD84]/10 rotate-45 group-hover:scale-110 transition-transform duration-500" />
-        <div className="absolute -top-35 left-17 w-0 h-105 border-30 border-[#F2FD84]/10 rotate-45 group-hover:scale-110 transition-transform duration-500" />
-
+            <div className="absolute -top-25 left-1 w-0 h-95 border-30 border-[#F2FD84]/10 rotate-45 group-hover:scale-110 transition-transform duration-500" />
+            <div className="absolute -top-35 left-17 w-0 h-105 border-30 border-[#F2FD84]/10 rotate-45 group-hover:scale-110 transition-transform duration-500" />
           </div>
 
-          {/* Small floating stat updated to match HowItWorks theme */}
+          {/*  floating stat */}
           <div className="absolute -bottom-6 -left-6 rounded-xl border border-gray-700/30 bg-[#2B2B2B] px-6 py-4 shadow-xl">
-            <p className="font-heading text-3xl font-black text-[#F2FD84]">250+</p>
+            <p className="font-heading text-3xl font-black text-[#F2FD84]">
+              250+
+            </p>
             <p className="font-body text-xs uppercase tracking-wide text-gray-400">
               Active members
             </p>

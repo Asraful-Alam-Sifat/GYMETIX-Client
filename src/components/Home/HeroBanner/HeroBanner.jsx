@@ -13,12 +13,11 @@ const HeroBanner = () => {
           src={bannerImg}
           alt="Hero Banner"
           fill
-          
           className="object-cover object-right md:object-center"
         />
 
         {/* Gradient */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#222223] via-[#222223]/80 to-[#222223]/20 mix-blend-multiply" />
+        <div className="absolute inset-0 bg-linear-to-r from-[#222223] via-[#222223]/80 to-[#222223]/20 mix-blend-multiply" />
         <div className="absolute inset-0 bg-neutral-900/40 backdrop-grayscale" />
       </div>
 
