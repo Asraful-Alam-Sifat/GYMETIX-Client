@@ -42,7 +42,9 @@ const features = [
 
 export default function PlatformFeatures() {
   return (
-    <section className="bg-[#222222] py-20 px-6">
+    <section className=" bg-[#222222] py-20 px-6">
+      
+
       <div className="max-w-7xl mx-auto text-center">
         <p className="font-heading text-[#F2FD84] text-xs font-bold uppercase tracking-[0.2em] mb-4">
           Platform Features
@@ -53,6 +55,7 @@ export default function PlatformFeatures() {
 
         {/* Feature Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
           {features.map((feature, index) => (
             <div
               key={index}
