@@ -12,7 +12,7 @@ const HowItWorks = () => {
     <section className="w-full bg-[#222222] pb-20 relative overflow-hidden">
    
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-20 left-1/4 w-96 h-96 rounded-full bg-radial from-[#F2FD84]/10 via-transparent to-transparent blur-3xl" />
+        <div className="absolute top-10 left-1/4 w-106 h-106 rounded-full bg-radial from-[#F2FD84]/20 via-transparent to-transparent blur-3xl" />
       </div>
 
       <div className="sm:max-w-10/12 mx-auto px-6 relative z-20">
@@ -54,3 +54,7 @@ const HowItWorks = () => {
 };
 
 export default HowItWorks;
+
+
+
+
