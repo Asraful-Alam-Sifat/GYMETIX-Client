@@ -1,7 +1,7 @@
 "use client";
-import React, { useEffect, useState, useRef } from "react";
+import  { useEffect, useState, useRef } from "react";
 import Image from "next/image";
-import { MdStar, MdChevronLeft, MdChevronRight } from "react-icons/md";
+import { MdStar } from "react-icons/md";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { BsArrowRight } from "react-icons/bs";
@@ -87,10 +87,9 @@ const FeaturedClasses = () => {
       </div>
 
       <section className="sm:max-w-10/12 mx-auto px-6 relative  z-20">
-        {/* Section Header with Navigation Arrows */}
+        {/* Section Header */}
         <div className="flex flex-col mb-4">
           <div className="w-full flex justify-center flex-col text-center mb-0">
-            {/* Small Slogan/Category Label */}
             <p className="font-heading text-[#F2FD84] text-xs font-bold uppercase tracking-[0.2em] mb-4">
               Top Sessions
             </p>
@@ -100,7 +99,6 @@ const FeaturedClasses = () => {
               Featured <span className="text-[#F2FD84]">Classes</span>
             </h2>
 
-            {/* Description */}
             <p className="font-body text-gray-400 mx-auto text-sm md:text-base max-w-xl font-light leading-relaxed">
               Our highly rated and most booked sessions designed to push your
               limits.
@@ -152,16 +150,15 @@ const FeaturedClasses = () => {
                     <div className="absolute -bottom-44 -right-20 w-42 h-90 rotate-45 z-10 border-35 border-[#F2FD84]/35 transition-transform duration-500 group-hover:scale-110" />
                     <div className="absolute -bottom-44 -right-35 w-42 h-90 rotate-45 z-10 border-15 border-[#F2FD84]/20 transition-transform duration-500 group-hover:scale-110" />
 
-                    
                     {/* Hover Overlay Quick Book Button */}
-<div className="absolute inset-0 bg-black/60 opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px] z-20">
-  <Link
-    href={`/classes/${cls.id}`}
-    className="font-heading text-white border border-white text-xs font-black px-5 py-2.5 rounded-lg uppercase tracking-wider translate-y-0 lg:translate-y-4 lg:group-hover:translate-y-0 transition-all duration-300 shadow-2xl hover:bg-[#F2FD84] hover:text-black hover:border-transparent active:scale-95"
-  >
-    Quick Book
-  </Link>
-</div>
+                    <div className="absolute inset-0 bg-black/60 opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px] z-20">
+                      <Link
+                        href={`/classes/${cls.id}`}
+                        className="font-heading text-white border border-white text-xs font-black px-5 py-2.5 rounded-lg uppercase tracking-wider translate-y-0 lg:translate-y-4 lg:group-hover:translate-y-0 transition-all duration-300 shadow-2xl hover:bg-[#F2FD84] hover:text-black hover:border-transparent active:scale-95"
+                      >
+                        Quick Book
+                      </Link>
+                    </div>
 
                     <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/20 to-transparent z-0" />
 
@@ -189,7 +186,6 @@ const FeaturedClasses = () => {
                         </span>
                       </Link>
 
-                      {/* Description */}
                       <p className="font-body text-gray-400 text-xs md:text-sm font-light leading-relaxed line-clamp-2 mt-1.5 mb-5">
                         {cls.description}
                       </p>

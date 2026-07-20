@@ -5,6 +5,7 @@ import WhyGymetix from "@/components/Home/WhyGymetix/WhyGymetix";
 import PlatformFeatures from "@/components/Home/PlatformFeatures/PlatformFeatures";
 import JoinNow from "@/components/Home/JoinNow/JoinNow";
 import FeaturedTrainers from "@/components/Home/FeaturedTrainers/FeaturedTrainers";
+import MembershipPlans from "@/components/Home/MembershipPlan/MembershipPlan";
 
 
 
@@ -17,6 +18,7 @@ export default function Home() {
       <WhyGymetix/>
       <PlatformFeatures/>
       <JoinNow /> 
+      <MembershipPlans/>
       <FeaturedTrainers/>
     </div>
   );
