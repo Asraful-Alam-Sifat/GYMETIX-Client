@@ -31,7 +31,7 @@ export default function WhyGymetix() {
     <section className="relative bg-[#222222] pt- sm:pt-20 pb-20 px-6 lg:px-10">
 
       {/* glow bg blob */}
-       <div className="absolute -bottom-40 -left-20 w-120 h-120 rounded-full bg-radial from-[#F2FD84]/20 via-transparent to-transparent blur-3xl pointer-events-none" />
+       <div className="absolute -bottom-40 -left-20 min-w-90 max-w-120 h-120 rounded-full bg-radial from-[#F2FD84]/20 via-transparent to-transparent blur-3xl pointer-events-none" />
       <div className="mx-auto grid max-w-10/12 lg:max-w-6xl grid-cols-1 gap-14 lg:grid-cols-2 lg:items-center">
         {/* Left */}
         <div>

@@ -100,7 +100,7 @@ const Footer = () => {
 
         <div>
           <h4 className="font-heading text-white font-bold text-base mb-4 tracking-wide">
-            Company
+            About 
           </h4>
           <ul className="font-body space-y-3 text-sm text-zinc-400 flex flex-col">
             <Link

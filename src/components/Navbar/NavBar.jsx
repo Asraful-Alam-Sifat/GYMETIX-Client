@@ -73,7 +73,7 @@ const NavBar = () => {
   return (
     <nav
       id="main-navbar"
-      className="fixed top-0 left-0 w-full z-50 bg-transparent transition-all duration-300 ease-in-out border-b border-transparent"
+      className="fixed top-0 left-0 w-screen z-50 bg-transparent transition-all duration-300 ease-in-out border-b border-transparent"
     >
       <div className="max-w-11/12 mx-auto px-4 py-3 flex items-center justify-between">
         {/* Navbar Start */}

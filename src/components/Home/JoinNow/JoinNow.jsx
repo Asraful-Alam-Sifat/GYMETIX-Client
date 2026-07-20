@@ -44,9 +44,9 @@ const JoinNow = () => {
 
       {/* Decorative Accent matching the theme */}
     <div 
-  className="absolute top-28 left-10 w-14 h-84 rotate-85 bg-[#F2FD84]/25 -skew-x-[40deg] pointer-events-none" 
+  className="absolute bottom-3 -left-20 sm:bottom-5 sm:-left-5 md:bottom-10 md:left-10 lg:top-27 w-10 h-84 sm:w-11 md:w-14  rotate-85 bg-[#F2FD84]/25 skew-x-[-40deg] pointer-events-none" 
 />
-      <div className="absolute -bottom-25 -left-30 w-125 h-60 bg-[#F2FD84]/13 rotate-35 group-hover:scale-110 transition-transform duration-500" />
+      <div className="absolute -bottom-25 -left-30 w-70 h-50 sm:w-90 sm:h-56 md:w-125 md:h-60 bg-[#F2FD84]/13 rotate-35 group-hover:scale-110 transition-transform duration-500" />
 
     </section>
   );

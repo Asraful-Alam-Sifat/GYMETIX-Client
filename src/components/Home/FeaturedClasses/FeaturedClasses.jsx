@@ -89,14 +89,14 @@ const FeaturedClasses = () => {
       <section className="sm:max-w-10/12 mx-auto px-6 relative  z-20">
         {/* Section Header with Navigation Arrows */}
         <div className="flex flex-col mb-4">
-          <div className="w-full flex justify-center flex-col text-center mb-16">
+          <div className="w-full flex justify-center flex-col text-center mb-0">
             {/* Small Slogan/Category Label */}
             <p className="font-heading text-[#F2FD84] text-xs font-bold uppercase tracking-[0.2em] mb-4">
               Top Sessions
             </p>
 
             {/* Main Title */}
-            <h2 className="font-heading text-3xl md:text-5xl font-black uppercase tracking-tight text-white mb-6">
+            <h2 className="font-heading text-3xl md:text-5xl font-black uppercase tracking-tight text-white mb-1.5">
               Featured <span className="text-[#F2FD84]">Classes</span>
             </h2>
 
@@ -108,7 +108,7 @@ const FeaturedClasses = () => {
           </div>
           <Link
             href="/all-classes"
-            className="font-heading flex items-center gap-1 border p-2 rounded-box text-xs font-normal uppercase tracking-wider text-[#F2FD84]/80 hover:text-black hover:bg-[#F2FD84] transition-colors duration-300 self-end mt-6"
+            className="font-heading flex items-center gap-1 border p-1.5 sm:p-2 rounded-box text-[8px] sm:text-xs font-normal uppercase tracking-wider text-[#F2FD84]/80 hover:text-black hover:bg-[#F2FD84] transition-colors duration-300 self-end mt-6"
           >
             View All Classes <BsArrowRight />
           </Link>
@@ -152,15 +152,16 @@ const FeaturedClasses = () => {
                     <div className="absolute -bottom-44 -right-20 w-42 h-90 rotate-45 z-10 border-35 border-[#F2FD84]/35 transition-transform duration-500 group-hover:scale-110" />
                     <div className="absolute -bottom-44 -right-35 w-42 h-90 rotate-45 z-10 border-15 border-[#F2FD84]/20 transition-transform duration-500 group-hover:scale-110" />
 
+                    
                     {/* Hover Overlay Quick Book Button */}
-                    <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px] z-20">
-                      <Link
-                        href={`/classes/${cls.id}`}
-                        className="font-heading text-white border border-white text-xs font-black px-5 py-2.5 rounded-lg uppercase tracking-wider transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 shadow-2xl hover:bg-[#F2FD84] hover:text-black hover:border-transparent active:scale-95"
-                      >
-                        Quick Book
-                      </Link>
-                    </div>
+<div className="absolute inset-0 bg-black/60 opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px] z-20">
+  <Link
+    href={`/classes/${cls.id}`}
+    className="font-heading text-white border border-white text-xs font-black px-5 py-2.5 rounded-lg uppercase tracking-wider translate-y-0 lg:translate-y-4 lg:group-hover:translate-y-0 transition-all duration-300 shadow-2xl hover:bg-[#F2FD84] hover:text-black hover:border-transparent active:scale-95"
+  >
+    Quick Book
+  </Link>
+</div>
 
                     <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/20 to-transparent z-0" />
 
@@ -216,15 +217,15 @@ const FeaturedClasses = () => {
                     {/* Stats Footer */}
                     <div className="border-t border-gray-700/80 pt-3.5 flex justify-between items-center text-xs tracking-wider font-mono">
                       <div className="flex items-center gap-1 text-gray-400">
-                        <span className="text-[#F2FD84] text-sm">
+                        <span className="text-[#F2FD84] text-xs sm:text-sm lg:text-xs xl:text-sm">
                           <MdStar />
                         </span>
-                        <span className="font-bold text-white text-sm">
+                        <span className="font-bold text-white text-xs sm:text-sm lg:text-xs xl:text-sm">
                           {cls.rating}
                         </span>
                       </div>
 
-                      <div className="font-body text-gray-400 text-xs tracking-wider">
+                      <div className="font-body text-gray-400 text-[10px] sm:text-xs lg:text-[10px] xl:text-xs tracking-wider">
                         Available:{" "}
                         <span
                           className={`font-bold ${cls.totalSlots - cls.booked <= 3 ? "text-red-400" : "text-white/95"}`}
@@ -233,9 +234,9 @@ const FeaturedClasses = () => {
                         </span>
                       </div>
 
-                      <div className="font-heading text-[#F2FD84] font-black text-base">
+                      <div className="font-heading text-[#F2FD84] font-black text-sm sm:text-base lg:text-sm xl:text-base">
                         ${cls.price}
-                        <span className="text-[16px] text-gray-300 font-normal">
+                        <span className="text-sm sm:text-base lg:text-sm xl:text-base text-gray-300 font-normal">
                           /session
                         </span>
                       </div>

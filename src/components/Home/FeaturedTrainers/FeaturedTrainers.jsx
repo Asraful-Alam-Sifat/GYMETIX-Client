@@ -18,7 +18,7 @@ const FeaturedTrainers = () => {
               throw new Error("Failed to fetch featured trainers");
             }
             const data = await response.json();
-            console.log("Fetched trainers:", data); // Log the fetched data
+           
             setTrainers(data);
           } catch (err) {
             console.error("Error fetching trainers:", err);
@@ -32,7 +32,8 @@ const FeaturedTrainers = () => {
         
       }, [baseUrl]);
 
-      
+      const featuredTrainers = trainers.filter(trainer => trainer.featured);
+      console.log("Featured trainers:", featuredTrainers); // Log the filtered featured trainers
 
     return (
         <section className="bg-[#222222] py-20 px-6">
@@ -48,8 +49,18 @@ const FeaturedTrainers = () => {
 
     {/* Trainers Grid */}
    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-  {trainers.map((trainer) => (
-    <div
+  {featuredTrainers.map((trainer) => {
+
+// Calculate total sum of ratings and divide by the number of reviews
+const totalRating = trainer.reviews.reduce((sum, review) => sum + Number(review.rating), 0);
+const averageRating = trainer.reviews.length > 0 
+  ? (totalRating / trainer.reviews.length).toFixed(1) 
+  : 0;
+    console.log("Rendering trainer:", trainer); // Log each trainer being rendered
+
+    
+    return (
+      <div
       key={trainer._id} // Use the unique MongoDB _id instead of index
       className="relative p-8 rounded-2xl bg-transparent border border-white/8 backdrop-blur-sm transition-all duration-500 hover:bg-white/6 hover:border-[#F2FD84]/30 hover:shadow-[0_0_30px_-10px_rgba(242,253,132,0.2)] text-center overflow-hidden group"
     >
@@ -75,19 +86,19 @@ const FeaturedTrainers = () => {
           {trainer.name}
         </h3>
         <p className="font-body text-[#F2FD84] text-xs font-medium uppercase mb-3">
-          {trainer.specialty || "Professional Trainer"}
+          {trainer.specialty || "Fitness Coach"}
         </p>
         
         {/* Rating Logic: Show rating if it exists, otherwise show 'New' */}
         <div className="flex justify-center items-center gap-1 text-sm text-gray-400">
-          {trainer.rating ? (
+          {trainer.reviews ? (
             <>
               <span className="text-[#F2FD84]">★</span>
-              {trainer.rating} 
-              <span className="text-gray-600">{trainer.reviews ? `(${trainer.reviews} reviews)` : 'No reviews yet'}</span>
+              {averageRating} 
+              <span className="text-gray-600">( {trainer.reviews.length} reviews )</span>
             </>
           ) : (
-            <span className="text-gray-500 italic">No ratings yet</span>
+            <span className="text-gray-500 italic">No reviews yet</span>
           )}
         </div>
       </div>
@@ -95,7 +106,8 @@ const FeaturedTrainers = () => {
       {/* Decorative accent line */}
       <div className="absolute bottom-0 right-0 w-16 h-1 bg-[#F2FD84]/20 rounded-tl-full group-hover:w-24 transition-all duration-500" />
     </div>
-  ))}
+    )
+  })}
 </div>
   </div>
 </section>
