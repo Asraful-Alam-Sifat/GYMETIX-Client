@@ -1,10 +1,10 @@
 import HeroBanner from "@/components/Home/HeroBanner/HeroBanner";
-import FeaturedClasses from "@/components/Home/FeaturedClasses/FeaturedClasses";
-import HowItWorks from "@/components/Home/HowItWorks/HowItWorks";
-import WhyGymetix from "@/components/Home/WhyGymetix/WhyGymetix";
-import PlatformFeatures from "@/components/Home/PlatformFeatures/PlatformFeatures";
-import JoinNow from "@/components/Home/JoinNow/JoinNow";
-import FeaturedTrainers from "@/components/Home/FeaturedTrainers/FeaturedTrainers";
+import FeaturedClasses from "@/components/Home/FeaturedClasses";
+import HowItWorks from "@/components/Home/HowItWorks";
+import WhyGymetix from "@/components/Home/WhyGymetix";
+import PlatformFeatures from "@/components/Home/PlatformFeatures";
+import JoinNow from "@/components/Home/JoinNow";
+import FeaturedTrainers from "@/components/Home/FeaturedTrainers";
 import MembershipPlans from "@/components/Home/MembershipPlan/MembershipPlan";
 
 

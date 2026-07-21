@@ -150,25 +150,25 @@ const FeaturedClasses = () => {
                     <div className="absolute -bottom-44 -right-20 w-42 h-90 rotate-45 z-10 border-35 border-[#F2FD84]/35 transition-transform duration-500 group-hover:scale-110" />
                     <div className="absolute -bottom-44 -right-35 w-42 h-90 rotate-45 z-10 border-15 border-[#F2FD84]/20 transition-transform duration-500 group-hover:scale-110" />
 
-                    {/* Hover Overlay Quick Book Button */}
+                    {/* Hover Overlay View Details Button */}
                     <div className="absolute inset-0 bg-black/60 opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px] z-20">
                       <Link
                         href={`/classes/${cls.id}`}
                         className="font-heading text-white border border-white text-xs font-black px-5 py-2.5 rounded-lg uppercase tracking-wider translate-y-0 lg:translate-y-4 lg:group-hover:translate-y-0 transition-all duration-300 shadow-2xl hover:bg-[#F2FD84] hover:text-black hover:border-transparent active:scale-95"
                       >
-                        Quick Book
+                        View Details
                       </Link>
                     </div>
 
                     <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/20 to-transparent z-0" />
 
                     {/* Category Badge */}
-                    <span className="font-heading absolute top-3 left-3 bg-[#ff1e1e] text-white text-[10px] font-bold px-2.5 py-1 rounded-sm uppercase tracking-wider z-10">
+                    <span className="font-heading absolute top-3 left-3 bg-[#ff1e1e] text-white text-[10px] font-bold px-2.5 py-1 rounded-sm uppercase tracking-wider z-30 opacity-100 lg:opacity-100 lg:group-hover:opacity-0 transition-opacity duration-300">
                       {cls.category}
                     </span>
 
                     {/* Level Badge */}
-                    <span className="font-heading absolute top-3 right-3 bg-black/70 border border-gray-800 text-gray-300 text-[10px] font-medium px-2 py-1 rounded-sm uppercase tracking-wider z-10">
+                    <span className="font-heading absolute top-3 right-3 bg-black/70 border border-gray-800 text-gray-300 text-[10px] font-medium px-2 py-1 rounded-sm uppercase tracking-wider z-30 opacity-100 lg:opacity-100 lg:group-hover:opacity-0 transition-opacity duration-300">
                       {cls.level}
                     </span>
                   </div>
