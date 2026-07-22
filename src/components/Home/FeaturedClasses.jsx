@@ -153,7 +153,7 @@ const FeaturedClasses = () => {
                     {/* Hover Overlay View Details Button */}
                     <div className="absolute inset-0 bg-black/60 opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px] z-20">
                       <Link
-                        href={`/classes/${cls.id}`}
+                        href={`/classes/${cls._id}`}
                         className="font-heading text-white border border-white text-xs font-black px-5 py-2.5 rounded-lg uppercase tracking-wider translate-y-0 lg:translate-y-4 lg:group-hover:translate-y-0 transition-all duration-300 shadow-2xl hover:bg-[#F2FD84] hover:text-black hover:border-transparent active:scale-95"
                       >
                         View Details

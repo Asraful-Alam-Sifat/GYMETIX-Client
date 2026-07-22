@@ -22,6 +22,7 @@ const AllClassesPage = ({ searchParams }) => {
       setLoading(true);
       try {
         const queryParams = new URLSearchParams();
+        queryParams.append("status", "Approved");
         if (searchTerm) queryParams.append("search", searchTerm);
         if (selectedCategory && selectedCategory !== "all")
           queryParams.append("category", selectedCategory);
@@ -66,17 +67,18 @@ const AllClassesPage = ({ searchParams }) => {
   };
 
   return (
-    <div className="bg-[#222222] text-white min-h-screen font-body selection:bg-[#F2FD84] selection:text-[#222222] pt-10">
+    <div className="relative bg-[#222222] text-white min-h-screen font-body selection:bg-[#F2FD84] selection:text-[#222222] pt-25">
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10">
         {/* Loading / Error States */}
         {loading && (
-          <div className="text-center py-20 text-gray-400">
-            Loading classes...
-          </div>
+         <div className="py-20 text-center text-gray-400 bg-[#222222]">
+        <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-[#F2FD84] mx-auto mb-4"></div>
+        <p className="text-sm font-body tracking-wider">LOADING CLASSES...</p>
+      </div>
         )}
         {error && (
-          <div className="text-center py-20 text-red-500">Error: {error}</div>
+          <div className="font-body text-center py-20 text-red-500">Error: {error}</div>
         )}
 
         {/* Classes Grid */}
@@ -87,7 +89,7 @@ const AllClassesPage = ({ searchParams }) => {
             ))}
           </div>
         ) : !loading && !error ? (
-          <div className="text-center py-20 text-gray-500">
+          <div className="font-body text-center py-20 text-gray-500">
             <p className="text-lg">No classes found matching your search.</p>
           </div>
         ) : null}
@@ -131,6 +133,10 @@ const AllClassesPage = ({ searchParams }) => {
           </div>
         )}
       </main>
+
+      <div className="absolute -top-35 right-15 w-126 h-126 rounded-full bg-radial from-[#F2FD84]/20 via-transparent to-transparent blur-3xl pointer-events-none" />
+
+      <div className="absolute bottom-30 -left-20 w-100 h-100 sm:w-126 sm:h-126 rounded-full bg-radial from-[#F2FD84]/15 via-transparent to-transparent blur-3xl pointer-events-none" />
     </div>
   );
 };

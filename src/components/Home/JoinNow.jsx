@@ -16,7 +16,7 @@ const JoinNow = () => {
         alt="Person working out"
         fill
         className="object-cover object-center"
-        priority
+     
       />
 
       <div className="absolute inset-0 bg-linear-to-r from-[#222223]/10 via-[#222223]/85 to-[#050505] mix-blend-multiply" />

@@ -21,6 +21,10 @@ const HeroBanner = () => {
         <div className="absolute inset-0 bg-neutral-900/40 backdrop-grayscale" />
       </div>
 
+      {/* angled corner top */}
+        <div className="absolute -top-32 -right-30 sm:-top-50 sm:right-5 w-15 sm:w-35 h-140 bg-[#F2FD84]/8 rotate-130 group-hover:scale-110 transition-transform duration-500" />
+            <div className="absolute -top-23 -right-15 sm:-top-32 sm:right-15 w-7 sm:w-14 h-105 bg-[#F2FD84]/9 rotate-130 group-hover:scale-110 transition-transform duration-500" />
+
       {/* 2. Main Content */}
       <div className="relative z-10 sm:max-w-11/12 xl:max-w-10/12  w-full mx-auto px-6 md:px-12 grow flex flex-col justify-center pt-24 pb-12">
         <div className="max-w-2xl space-y-6">

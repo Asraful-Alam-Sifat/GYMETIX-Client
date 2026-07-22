@@ -22,8 +22,8 @@ export default function FitnessClassesCard({ classItem }) {
           />
 
           {/*  Angled Corner */}
-          <div className="absolute -bottom-44 -right-20 w-42 h-90 rotate-45 z-10 border-35 border-[#F2FD84]/35 transition-transform duration-500 group-hover:scale-110" />
-          <div className="absolute -bottom-44 -right-35 w-42 h-90 rotate-45 z-10 border-15 border-[#F2FD84]/20 transition-transform duration-500 group-hover:scale-110" />
+          <div className="absolute -bottom-44 -right-20 w-42 h-90 rotate-45 z-10 border-35 border-[#F2FD84]/20 transition-transform duration-500 group-hover:scale-110" />
+          <div className="absolute -bottom-44 -right-35 w-42 h-90 rotate-45 z-10 border-15 border-[#F2FD84]/10 transition-transform duration-500 group-hover:scale-110" />
 
           {/* View Details Button */}
           <div className="absolute inset-0 bg-black/60 opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px] z-20">
