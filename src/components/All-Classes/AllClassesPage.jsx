@@ -1,134 +1,138 @@
-"use client"
-import { useEffect, useState } from 'react';
-import { usePathname, useRouter } from 'next/navigation';
-import FitnessClassesCard from "@/components/All-Classes/FitnessClassesCard"
+"use client";
+import { useEffect, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import FitnessClassesCard from "@/components/All-Classes/FitnessClassesCard";
 
 const AllClassesPage = ({ searchParams }) => {
-    const baseUrl = process.env.NEXT_PUBLIC_SERVER_URL || "http://localhost:5000";
-    const router = useRouter();
-    const pathname = usePathname();
-    const [classes, setClasses] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+  const baseUrl = process.env.NEXT_PUBLIC_SERVER_URL || "http://localhost:5000";
+  const router = useRouter();
+  const pathname = usePathname();
+  const [classes, setClasses] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-    const searchTerm = searchParams?.search || '';
-    const selectedCategory = searchParams?.category || 'all';
+  const searchTerm = searchParams?.search || "";
+  const selectedCategory = searchParams?.category || "all";
 
-    // Pagination is stored in the URL so filter changes can reset it to page 1.
-    const currentPage = Number(searchParams?.page) || 1;
-    const itemsPerPage = 6;
+  const currentPage = Number(searchParams?.page) || 1;
+  const itemsPerPage = 6;
 
-    useEffect(() => {
-        const fetchFeaturedClasses = async () => {
-          try {
-            const response = await fetch(`${baseUrl}/classes`);
-            if (!response.ok) {
-              throw new Error("Failed to fetch classes");
-            }
-            const data = await response.json();
-            setClasses(data);
-          } catch (err) {
-            console.error("Error fetching classes:", err);
-            setError(err.message);
-          } finally {
-            setLoading(false);
-          }
-        };
-    
-        fetchFeaturedClasses();
-    }, [baseUrl]);
+  useEffect(() => {
+    const fetchFilteredClasses = async () => {
+      setLoading(true);
+      try {
+        const queryParams = new URLSearchParams();
+        if (searchTerm) queryParams.append("search", searchTerm);
+        if (selectedCategory && selectedCategory !== "all")
+          queryParams.append("category", selectedCategory);
 
-    // Filter logic based on props coming from server searchParams
-    const filteredClasses = classes.filter((item) => {
-        const matchesSearch = item.title.toLowerCase().includes(searchTerm.toLowerCase());
-        const matchesCategory = selectedCategory === 'all' || item.category === selectedCategory;
-        return matchesSearch && matchesCategory;
-    });
-
-    // 2. Calculate Total Pages & Slice Data for Current Page
-    const totalPages = Math.ceil(filteredClasses.length / itemsPerPage);
-    const indexOfLastItem = currentPage * itemsPerPage;
-    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentClasses = filteredClasses.slice(indexOfFirstItem, indexOfLastItem);
-
-    const goToPage = (pageNumber) => {
-        if (pageNumber >= 1 && pageNumber <= totalPages) {
-            const params = new URLSearchParams();
-            Object.entries(searchParams || {}).forEach(([key, value]) => {
-                if (value !== undefined && value !== null) {
-                    params.set(key, String(value));
-                }
-            });
-            params.set('page', String(pageNumber));
-            router.push(`${pathname}?${params.toString()}`);
-            window.scrollTo({ top: 400, behavior: 'smooth' }); 
+        const response = await fetch(
+          `${baseUrl}/classes?${queryParams.toString()}`,
+        );
+        if (!response.ok) {
+          throw new Error("Failed to fetch classes");
         }
+        const data = await response.json();
+        setClasses(data);
+      } catch (err) {
+        console.error("Error fetching classes:", err);
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
     };
 
-    return (
-       <div className="bg-[#222222] text-white min-h-screen font-body selection:bg-[#F2FD84] selection:text-[#222222] pt-10">
-            {/* Main Content */}
-            <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10">
+    fetchFilteredClasses();
+  }, [baseUrl, searchTerm, selectedCategory]);
 
-                {/* Loading / Error States */}
-                {loading && <div className="text-center py-20 text-gray-400">Loading classes...</div>}
-                {error && <div className="text-center py-20 text-red-500">Error: {error}</div>}
+  // Calculate pagination slices on the server-filtered results
+  const totalPages = Math.ceil(classes.length / itemsPerPage);
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentClasses = classes.slice(indexOfFirstItem, indexOfLastItem);
 
-                {/* Classes Grid */}
-                {!loading && !error && currentClasses.length > 0 ? (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {currentClasses.map((item) => (
-                            <FitnessClassesCard key={item._id} classItem={item} />
-                        ))}
-                    </div>
-                ) : !loading && !error ? (
-                    <div className="text-center py-20 text-gray-500">
-                        <p className="text-lg">No classes found matching your search.</p>
-                    </div>
-                ) : null}
+  const goToPage = (pageNumber) => {
+    if (pageNumber >= 1 && pageNumber <= totalPages) {
+      const params = new URLSearchParams();
+      Object.entries(searchParams || {}).forEach(([key, value]) => {
+        if (value !== undefined && value !== null) {
+          params.set(key, String(value));
+        }
+      });
+      params.set("page", String(pageNumber));
+      router.push(`${pathname}?${params.toString()}`);
+      window.scrollTo({ top: 400, behavior: "smooth" });
+    }
+  };
 
-                {/* Dynamic Pagination */}
-                {!loading && !error && totalPages > 1 && (
-                    <div className="flex items-center justify-center space-x-2 mt-12">
-                        <button 
-                            onClick={() => goToPage(currentPage - 1)}
-                            disabled={currentPage === 1}
-                            className="w-9 h-9 rounded-xl bg-[#1a1a1a] border border-gray-800 flex items-center justify-center text-gray-400 hover:text-white transition disabled:opacity-40 disabled:cursor-not-allowed"
-                        >
-                            &lt;
-                        </button>
+  return (
+    <div className="bg-[#222222] text-white min-h-screen font-body selection:bg-[#F2FD84] selection:text-[#222222] pt-10">
+      {/* Main Content */}
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10">
+        {/* Loading / Error States */}
+        {loading && (
+          <div className="text-center py-20 text-gray-400">
+            Loading classes...
+          </div>
+        )}
+        {error && (
+          <div className="text-center py-20 text-red-500">Error: {error}</div>
+        )}
 
-                        {[...Array(totalPages)].map((_, index) => {
-                            const pageNumber = index + 1;
-                            const isActive = currentPage === pageNumber;
-                            return (
-                                <button
-                                    key={pageNumber}
-                                    onClick={() => goToPage(pageNumber)}
-                                    className={`w-9 h-9 rounded-xl flex items-center justify-center transition ${
-                                        isActive 
-                                            ? "bg-[#F2FD84] font-bold text-[#222222] shadow-lg shadow-[#F2FD84]/20" 
-                                            : "bg-[#1a1a1a] border border-gray-800 text-gray-400 hover:text-white"
-                                    }`}
-                                >
-                                    {pageNumber}
-                                </button>
-                            );
-                        })}
+        {/* Classes Grid */}
+        {!loading && !error && currentClasses.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {currentClasses.map((item) => (
+              <FitnessClassesCard key={item._id} classItem={item} />
+            ))}
+          </div>
+        ) : !loading && !error ? (
+          <div className="text-center py-20 text-gray-500">
+            <p className="text-lg">No classes found matching your search.</p>
+          </div>
+        ) : null}
 
-                        <button 
-                            onClick={() => goToPage(currentPage + 1)}
-                            disabled={currentPage === totalPages}
-                            className="w-9 h-9 rounded-xl bg-[#1a1a1a] border border-gray-800 flex items-center justify-center text-gray-400 hover:text-white transition disabled:opacity-40 disabled:cursor-not-allowed"
-                        >
-                            &gt;
-                        </button>
-                    </div>
-                )}
+        {/* Dynamic Pagination */}
+        {!loading && !error && totalPages > 1 && (
+          <div className="flex items-center justify-center space-x-2 mt-12">
+            <button
+              onClick={() => goToPage(currentPage - 1)}
+              disabled={currentPage === 1}
+              className="w-9 h-9 rounded-xl bg-[#1a1a1a] border border-gray-800 flex items-center justify-center text-gray-400 hover:text-white transition disabled:opacity-40 disabled:cursor-not-allowed"
+            >
+              &lt;
+            </button>
 
-            </main>
-        </div>
-    );
+            {[...Array(totalPages)].map((_, index) => {
+              const pageNumber = index + 1;
+              const isActive = currentPage === pageNumber;
+              return (
+                <button
+                  key={pageNumber}
+                  onClick={() => goToPage(pageNumber)}
+                  className={`w-9 h-9 rounded-xl flex items-center justify-center transition ${
+                    isActive
+                      ? "bg-[#F2FD84] font-bold text-[#222222] shadow-lg shadow-[#F2FD84]/20"
+                      : "bg-[#1a1a1a] border border-gray-800 text-gray-400 hover:text-white"
+                  }`}
+                >
+                  {pageNumber}
+                </button>
+              );
+            })}
+
+            <button
+              onClick={() => goToPage(currentPage + 1)}
+              disabled={currentPage === totalPages}
+              className="w-9 h-9 rounded-xl bg-[#1a1a1a] border border-gray-800 flex items-center justify-center text-gray-400 hover:text-white transition disabled:opacity-40 disabled:cursor-not-allowed"
+            >
+              &gt;
+            </button>
+          </div>
+        )}
+      </main>
+    </div>
+  );
 };
 
 export default AllClassesPage;
