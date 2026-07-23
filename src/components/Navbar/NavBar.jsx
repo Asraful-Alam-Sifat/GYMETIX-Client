@@ -170,7 +170,7 @@ const NavBar = () => {
                         className="font-body w-full flex items-center gap-2 px-3 py-2 text-[12px] text-[#bebeca] hover:text-red-400 hover:bg-red-500/10 rounded-sm transition-colors duration-150 text-left font-medium"
                       >
                         <FaArrowRightFromBracket />
-                        Log out
+                        Sign Out
                       </button>
                     </div>
                   </>
@@ -335,7 +335,7 @@ const NavBar = () => {
                         className="font-body w-full flex items-center gap-2 px-3 py-2 text-sm  text-[#bebeca] hover:text-red-400 hover:bg-red-500/10 rounded-sm transition-colors duration-150 text-left font-medium"
                       >
                         <FaArrowRightFromBracket />
-                        Log out
+                        Sign Out
                       </button>
                     </li>
                   </ul>

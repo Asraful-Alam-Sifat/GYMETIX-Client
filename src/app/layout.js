@@ -27,7 +27,7 @@ export default function RootLayout({ children }) {
       className={`${oswald.variable} ${inter.variable} min-h-screen antialiased`}
     >
       <body className="min-h-screen flex flex-col bg-[#222222]">
-        <NavBar />
+        {/* <NavBar /> */}
 
         <main className="flex-grow flex flex-col w-full relative">
           {children}

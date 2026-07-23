@@ -92,8 +92,8 @@ const ClassDetailsPage = async ({ params }) => {
          <div className="absolute -bottom-29 right-20 sm:right-15 sm:-bottom-55 md:right-57 w-18 h-54 sm:h-110 rotate-130 scale-x-[-1] bg-[#F2FD84]/5 skew-x-[-40deg] pointer-events-none" />
       </div>
 
-<div className="px-2">
-      {/* Main Content Layout */}
+  {/* Main Content Layout */}
+    <div className="px-2">
       <main className="max-w-6xl bg-neutral-900/40 backdrop-blur-xl mx-auto  p-6 sm:p-10 rounded-2xl border border-gray-500/20 z-50 ">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
           {/* Left Main Information Column */}
@@ -174,6 +174,7 @@ const ClassDetailsPage = async ({ params }) => {
         </div>
       </main>
     </div>
+
     {/* rounded glow blob */}
       <div className="absolute top-60 left-30  sm:w-96 h-96 rounded-full bg-radial from-[#F2FD84]/15 via-transparent to-transparent blur-3xl pointer-events-none" />
 
