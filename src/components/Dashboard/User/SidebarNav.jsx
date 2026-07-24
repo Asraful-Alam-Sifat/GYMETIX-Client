@@ -1,64 +1,59 @@
-'use client';
+"use client";
 
-
-import { 
-  BookOpen, 
-  Heart, 
-  UserCheck, 
-  LayoutDashboard, 
+import {
+  BookOpen,
+  Heart,
+  UserCheck,
+  LayoutDashboard,
   LogOut,
   Home,
   Compass,
   MessageSquare,
-  ChevronRight
-} from 'lucide-react';
-import Link from 'next/link';
-import Image from 'next/image';
-import { usePathname } from 'next/navigation';
+  ChevronRight,
+} from "lucide-react";
+import Link from "next/link";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
 import armIcon from "@/assets/Icons/arm-flex-icon.png";
-import { authClient } from '@/lib/auth-client';
-import { toast } from 'react-toastify';
+import { authClient } from "@/lib/auth-client";
+import { toast } from "react-toastify";
 
-
-
-export default  function SidebarNav() {
+export default function SidebarNav() {
   const pathname = usePathname();
- const { data: session, isPending, error } = authClient.useSession();
+  const { data: session, isPending, error } = authClient.useSession();
   const user = session?.user;
-const firstInitial = user?.name ? user.name.charAt(0).toUpperCase() : '?';
-
+  const firstInitial = user?.name ? user.name.charAt(0).toUpperCase() : "";
 
   const isActive = (path) => pathname === path;
 
   const handleLogout = async () => {
-      try {
-        await authClient.signOut({
-          fetchOptions: {
-            onSuccess: () => {
-                toast.success("Sign Out sucessfully..!")
-              localStorage.removeItem("gymetix_welcomed");
-  
-              
-              window.location.reload();
-            },
-          },
-        });
-      } catch (error) {
-        console.error("Error signing out: ", error);
-      }
-    };
+    try {
+      await authClient.signOut({
+        fetchOptions: {
+          onSuccess: () => {
+            toast.success("Sign Out sucessfully..!");
+            localStorage.removeItem("gymetix_welcomed");
 
-  const getNavClass = (path) => 
+            window.location.reload();
+          },
+        },
+      });
+    } catch (error) {
+      console.error("Error signing out: ", error);
+    }
+  };
+
+  const getNavClass = (path) =>
     `flex group items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-medium transition-all ${
-      isActive(path) 
-        ? 'text-[#F2FD84] bg-white/5 font-semibold' 
-        : 'text-gray-400 hover:text-[#F2FD84] hover:bg-white/4'
+      isActive(path)
+        ? "text-[#F2FD84] bg-white/5 font-semibold"
+        : "text-gray-400 hover:text-[#F2FD84] hover:bg-white/4"
     }`;
 
-  const getDashboardNavClass = (path) => 
+  const getDashboardNavClass = (path) =>
     isActive(path)
-      ? 'flex items-center justify-between px-4 py-3 rounded-xl bg-gradient-to-r from-[#F2FD84]/15 to-transparent border-l-4 border-[#F2FD84] text-[#F2FD84] font-medium text-sm transition-all shadow-[0_0_20px_-10px_rgba(242,253,132,0.2)]'
-      : 'flex items-center justify-between px-4 py-3 rounded-xl text-gray-400 hover:text-white hover:bg-white/[0.04] font-medium text-sm transition-all group';
+      ? "flex items-center justify-between px-4 py-3 rounded-xl bg-gradient-to-r from-[#F2FD84]/15 to-transparent border-l-4 border-[#F2FD84] text-[#F2FD84] font-medium text-sm transition-all shadow-[0_0_20px_-10px_rgba(242,253,132,0.2)]"
+      : "flex items-center justify-between px-4 py-3 rounded-xl text-gray-400 hover:text-white hover:bg-white/[0.04] font-medium text-sm transition-all group";
 
   return (
     <aside className="w-72 bg-[#222222] border-r border-white/8  flex-col justify-between hidden md:flex sticky top-0 h-screen shadow-2xl z-40">
@@ -82,25 +77,33 @@ const firstInitial = user?.name ? user.name.charAt(0).toUpperCase() : '?';
 
         {/* Navigation Links */}
         <div className="p-4 space-y-6">
-
           {/* Quick Navigation */}
           <div>
             <p className="px-4 text-xs font-heading font-bold uppercase tracking-[0.2em] text-[#F2FD84]/90 mb-3">
               Quick Navigation
             </p>
             <nav className="space-y-1.5">
-              <Link href="/" className={getNavClass('/')}>
-                <Home className={`w-3.5 h-3.5 ${isActive('/') ? 'text-[#F2FD84]' : 'text-gray-500 group-hover:text-[#F2FD84]'}`} />
+              <Link href="/" className={getNavClass("/")}>
+                <Home
+                  className={`w-3.5 h-3.5 ${isActive("/") ? "text-[#F2FD84]" : "text-gray-500 group-hover:text-[#F2FD84]"}`}
+                />
                 <span>Home Page</span>
               </Link>
 
-              <Link href="/all-classes" className={getNavClass('/all-classes')}>
-                <Compass className={`w-3.5 h-3.5 ${isActive('/all-classes') ? 'text-[#F2FD84]' : 'text-gray-500 group-hover:text-[#F2FD84]'}`} />
+              <Link href="/all-classes" className={getNavClass("/all-classes")}>
+                <Compass
+                  className={`w-3.5 h-3.5 ${isActive("/all-classes") ? "text-[#F2FD84]" : "text-gray-500 group-hover:text-[#F2FD84]"}`}
+                />
                 <span>All Classes</span>
               </Link>
 
-              <Link href="/community-forum" className={getNavClass('/community-forum')}>
-                <MessageSquare className={`w-3.5 h-3.5 ${isActive('/community-forum') ? 'text-[#F2FD84]' : 'text-gray-500 group-hover:text-[#F2FD84]'}`} />
+              <Link
+                href="/community-forum"
+                className={getNavClass("/community-forum")}
+              >
+                <MessageSquare
+                  className={`w-3.5 h-3.5 ${isActive("/community-forum") ? "text-[#F2FD84]" : "text-gray-500 group-hover:text-[#F2FD84]"}`}
+                />
                 <span>Community Forum</span>
               </Link>
             </nav>
@@ -112,56 +115,87 @@ const firstInitial = user?.name ? user.name.charAt(0).toUpperCase() : '?';
               Dashboard Menu
             </p>
             <nav className="space-y-1.5">
-              
-              <Link href="/dashboard/user" className={getDashboardNavClass('/dashboard/user')}>
+              <Link
+                href="/dashboard/user"
+                className={getDashboardNavClass("/dashboard/user")}
+              >
                 <div className="flex items-center gap-3">
-                  <LayoutDashboard className={`w-4 h-4 ${isActive('/dashboard/user') ? 'text-[#F2FD84]' : 'text-gray-400 group-hover:text-[#F2FD84] transition-colors'}`} />
+                  <LayoutDashboard
+                    className={`w-4 h-4 ${isActive("/dashboard/user") ? "text-[#F2FD84]" : "text-gray-400 group-hover:text-[#F2FD84] transition-colors"}`}
+                  />
                   <span>Overview</span>
                 </div>
-                {isActive('/dashboard/user') && <ChevronRight className="w-3.5 h-3.5 opacity-60" />}
+                {isActive("/dashboard/user") && (
+                  <ChevronRight className="w-3.5 h-3.5 opacity-60" />
+                )}
               </Link>
 
-              <Link href="/dashboard/user/booked-classes" className={getDashboardNavClass('/dashboard/user/booked-classes')}>
+              <Link
+                href="/dashboard/user/booked-classes"
+                className={getDashboardNavClass(
+                  "/dashboard/user/booked-classes",
+                )}
+              >
                 <div className="flex items-center gap-3">
-                  <BookOpen className={`w-4 h-4 ${isActive('/dashboard/user/booked-classes') ? 'text-[#F2FD84]' : 'text-gray-400 group-hover:text-[#F2FD84] transition-colors'}`} />
+                  <BookOpen
+                    className={`w-4 h-4 ${isActive("/dashboard/user/booked-classes") ? "text-[#F2FD84]" : "text-gray-400 group-hover:text-[#F2FD84] transition-colors"}`}
+                  />
                   <span>Booked Classes</span>
                 </div>
-                {isActive('/dashboard/user/booked-classes') && <ChevronRight className="w-3.5 h-3.5 opacity-60" />}
+                {isActive("/dashboard/user/booked-classes") && (
+                  <ChevronRight className="w-3.5 h-3.5 opacity-60" />
+                )}
               </Link>
 
-              <Link href="/dashboard/user/favorites" className={getDashboardNavClass('/dashboard/user/favorites')}>
+              <Link
+                href="/dashboard/user/favorites"
+                className={getDashboardNavClass("/dashboard/user/favorites")}
+              >
                 <div className="flex items-center gap-3">
-                  <Heart className={`w-4 h-4 ${isActive('/dashboard/user/favorites') ? 'text-[#F2FD84]' : 'text-gray-400 group-hover:text-[#F2FD84] transition-colors'}`} />
+                  <Heart
+                    className={`w-4 h-4 ${isActive("/dashboard/user/favorites") ? "text-[#F2FD84]" : "text-gray-400 group-hover:text-[#F2FD84] transition-colors"}`}
+                  />
                   <span>Favorites</span>
                 </div>
-                {isActive('/dashboard/user/favorites') && <ChevronRight className="w-3.5 h-3.5 opacity-60" />}
+                {isActive("/dashboard/user/favorites") && (
+                  <ChevronRight className="w-3.5 h-3.5 opacity-60" />
+                )}
               </Link>
 
-              <Link href="/dashboard/user/apply-trainer" className={getDashboardNavClass('/dashboard/user/apply-trainer')}>
+              <Link
+                href="/dashboard/user/apply-trainer"
+                className={getDashboardNavClass(
+                  "/dashboard/user/apply-trainer",
+                )}
+              >
                 <div className="flex items-center gap-3">
-                  <UserCheck className={`w-4 h-4 ${isActive('/dashboard/user/apply-trainer') ? 'text-[#F2FD84]' : 'text-gray-400 group-hover:text-[#F2FD84] transition-colors'}`} />
+                  <UserCheck
+                    className={`w-4 h-4 ${isActive("/dashboard/user/apply-trainer") ? "text-[#F2FD84]" : "text-gray-400 group-hover:text-[#F2FD84] transition-colors"}`}
+                  />
                   <span>Apply as Trainer</span>
                 </div>
-                {isActive('/dashboard/user/apply-trainer') && <ChevronRight className="w-3.5 h-3.5 opacity-60" />}
+                {isActive("/dashboard/user/apply-trainer") && (
+                  <ChevronRight className="w-3.5 h-3.5 opacity-60" />
+                )}
               </Link>
-
             </nav>
           </div>
-
         </div>
       </div>
 
-
       {/* User Profile Card & Sign Out */}
       <div className="p-4 border-t border-white/8 bg-[#141414]/50 space-y-3">
-        <Link href='/profile' className="flex items-center gap-3 p-2 rounded-xl bg-white/3 border border-white/5 backdrop-blur-sm transition-all duration-200 hover:border-[#F2FD84]/30 hover:shadow-[0_0_30px_-10px_rgba(242,253,132,0.15)] overflow-hidden hover:scale-99">
-         <div className='relative w-9 h-9 flex-shrink-0'>
+        <Link
+          href="/profile"
+          className="flex items-center gap-3 p-2 rounded-xl bg-white/3 border border-white/5 backdrop-blur-sm transition-all duration-200 hover:border-[#F2FD84]/30 hover:shadow-[0_0_30px_-10px_rgba(242,253,132,0.15)] overflow-hidden hover:scale-99"
+        >
+          <div className="relative w-9 h-9 flex-shrink-0">
             {user?.image ? (
-              <Image 
-              fill
-              sizes="76px"
-                src={user.image} 
-                alt={user?.name || "User Profile"} 
+              <Image
+                fill
+                sizes="76px"
+                src={user.image}
+                alt={user?.name || "User Profile"}
                 className="w-9 h-9 rounded-lg object-cover border border-[#F2FD84]/30"
               />
             ) : (
@@ -169,14 +203,19 @@ const firstInitial = user?.name ? user.name.charAt(0).toUpperCase() : '?';
                 {firstInitial}
               </div>
             )}
-         </div>
+          </div>
           <div className="overflow-hidden">
-            <h4 className="font-heading text-xs font-bold text-white truncate">{session?.user?.name}</h4>
+            <h4 className="font-heading text-xs font-bold text-white truncate">
+              {session?.user?.name}
+            </h4>
             <p className="text-[10px] text-[#F2FD84] font-medium">Profile</p>
           </div>
         </Link>
 
-        <button onClick={handleLogout} className="flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-xl text-red-400 hover:bg-red-500/10 hover:text-red-300 font-medium text-xs transition-all border border-red-500/10 cursor-pointer hover:scale-99">
+        <button
+          onClick={handleLogout}
+          className="flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-xl text-red-400 hover:bg-red-500/10 hover:text-red-300 font-medium text-xs transition-all border border-red-500/10 cursor-pointer hover:scale-99"
+        >
           <LogOut className="w-3.5 h-3.5" />
           Sign Out
         </button>

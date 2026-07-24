@@ -34,17 +34,12 @@ export default async function allClasses({ searchParams }) {
           className="w-full object-cover h-[500px]  shadow-lg"
         />
 
-
-
-
         <div className="absolute inset-0 bg-linear-to-r from-[#222223]/30 via-[#222223]/65 to-[#050505] mix-blend-multiply" />
         <div className="absolute inset-0 bg-neutral-900/40 backdrop-grayscale" />
 
-
- {/* angled corner top */}
+        {/* angled corner top */}
         <div className="absolute -top-40 -right-15 w-25 sm:w-40 h-100 bg-[#F2FD84]/8 rotate-125 group-hover:scale-110 transition-transform duration-500" />
-            <div className="absolute -top-32 -right-5 sm:right-2 w-7 sm:w-15 h-95 bg-[#F2FD84]/8 rotate-125 group-hover:scale-110 transition-transform duration-500" />
-
+        <div className="absolute -top-32 -right-5 sm:right-2 w-7 sm:w-15 h-95 bg-[#F2FD84]/8 rotate-125 group-hover:scale-110 transition-transform duration-500" />
 
         {/* Overlay container for Heading, Description, and Search/Filter */}
         <div className="absolute inset-0 flex flex-col sm:items-start justify-center px-6 sm:px-12 lg:px-20 z-10 max-w-9/12 xl:mx-auto w-full">
@@ -73,12 +68,9 @@ export default async function allClasses({ searchParams }) {
           </div>
         </div>
 
-       
-
-            {/* angle corner bottom */}
-            <div className="absolute -bottom-40 -left-15 w-25 sm:w-40 h-100 bg-[#F2FD84]/8 rotate-125 group-hover:scale-110 transition-transform duration-500" />
-            <div className="absolute -bottom-32 -left-5 sm:left-2 w-7 sm:w-15 h-95 bg-[#F2FD84]/8 rotate-125 group-hover:scale-110 transition-transform duration-500" />
-            
+        {/* angle corner bottom */}
+        <div className="absolute -bottom-40 -left-15 w-25 sm:w-40 h-100 bg-[#F2FD84]/8 rotate-125 group-hover:scale-110 transition-transform duration-500" />
+        <div className="absolute -bottom-32 -left-5 sm:left-2 w-7 sm:w-15 h-95 bg-[#F2FD84]/8 rotate-125 group-hover:scale-110 transition-transform duration-500" />
       </div>
 
       <AllClassesPage searchParams={resolvedSearchParams} />

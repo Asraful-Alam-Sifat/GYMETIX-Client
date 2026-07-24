@@ -83,7 +83,9 @@ const FeaturedTrainers = () => {
                     {trainer.name}
                   </h3>
                   <p className="font-body text-[#F2FD84] text-xs font-medium uppercase mb-3">
-                    {trainer.specialty || "Fitness Coach"}
+                    {trainer?.specialty ||
+                      trainer?.trainerApplication?.specialty ||
+                      "Fitness Coach"}
                   </p>
 
                   {/* Rating Logic */}

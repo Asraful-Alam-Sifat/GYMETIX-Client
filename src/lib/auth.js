@@ -53,6 +53,11 @@ export const auth = betterAuth({
         defaultValue: true,
         required: false,
       },
+      
+      trainerApplication: {
+        type: "object",
+        required: false,
+      },
     },
   },
 

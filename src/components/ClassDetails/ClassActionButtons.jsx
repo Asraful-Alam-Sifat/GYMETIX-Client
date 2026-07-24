@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
 
 export default function ClassActionButtons({ classData }) {
   const [isFavorite, setIsFavorite] = useState(false);
@@ -29,8 +30,12 @@ export default function ClassActionButtons({ classData }) {
           className="rounded-full object-cover border border-[#F2FD84]"
         />
         <div>
-          <p className="font-body text-xs text-gray-400 uppercase tracking-wider">Trainer</p>
-          <h4 className="font-heading text-xl  text-white">{classData.trainer.name}</h4>
+          <p className="font-body text-xs text-gray-400 uppercase tracking-wider">
+            Trainer
+          </p>
+          <h4 className="font-heading text-xl  text-white">
+            {classData.trainer.name}
+          </h4>
         </div>
       </div>
 
@@ -40,7 +45,9 @@ export default function ClassActionButtons({ classData }) {
           Schedule & Time
         </h3>
         <div>
-          <span className="font-body text-gray-400 text-xs block mb-1">Days:</span>
+          <span className="font-body text-gray-400 text-xs block mb-1">
+            Days:
+          </span>
           <div className="flex flex-wrap gap-1.5">
             {classData.schedule.map((day, index) => (
               <span
@@ -53,12 +60,16 @@ export default function ClassActionButtons({ classData }) {
           </div>
         </div>
         <div className="pt-1">
-          <span className="font-body text-gray-400 text-xs block">Time Slot:</span>
-          <span className="font-body text-[15px] text-white/90">{classData.time}</span>
+          <span className="font-body text-gray-400 text-xs block">
+            Time Slot:
+          </span>
+          <span className="font-body text-[15px] text-white/90">
+            {classData.time}
+          </span>
         </div>
       </div>
 
-      {/* Action Buttons with Enhanced Primary CTA Focus */}
+      {/* Action Buttons */}
       <div className=" bg-[#222222]/50 p-5 rounded-2xl border border-gray-700/80 space-y-3">
         <button
           onClick={handleBookNow}
@@ -72,20 +83,22 @@ export default function ClassActionButtons({ classData }) {
           {isBooked
             ? "Booked Successfully ✓"
             : isFull
-            ? "Class Full"
-            : "Book Now"}
+              ? "Class Full"
+              : "Book Now"}
         </button>
 
         <button
           onClick={handleFavoriteToggle}
-          className={`font-heading w-full py-3 rounded-xl font-bold border transition-all flex items-center justify-center gap-2 text-base ${
+          className={`font-heading w-full py-3 rounded-xl font-bold border transition-all flex items-center justify-center gap-2 text-sm ${
             isFavorite
               ? "bg-red-500/10 border-red-500 text-red-400 hover:scale-99 transition-all duration-200"
               : "bg-transparent border-gray-800 text-white hover:border-gray-600 hover:scale-99 transition-all duration-200"
           }`}
         >
-          <span>{isFavorite ? "❤️" : "🤍"}</span>
-          {isFavorite ? "Remove from Favorites" : "Add to Favorites"}
+          <FaHeart className={`w-4 h-4 ${isFavorite ? "fill-current" : ""}`} />
+          <span>
+            {isFavorite ? "Remove from Favorites" : "Add to Favorites"}
+          </span>
         </button>
       </div>
     </div>

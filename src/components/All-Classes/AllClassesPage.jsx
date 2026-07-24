@@ -70,15 +70,18 @@ const AllClassesPage = ({ searchParams }) => {
     <div className="relative bg-[#222222] text-white min-h-screen font-body selection:bg-[#F2FD84] selection:text-[#222222] pt-25">
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10">
-        {/* Loading / Error States */}
         {loading && (
-         <div className="py-20 text-center text-gray-400 bg-[#222222]">
-        <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-[#F2FD84] mx-auto mb-4"></div>
-        <p className="text-sm font-body tracking-wider">LOADING CLASSES...</p>
-      </div>
+          <div className="py-20 text-center text-gray-400 bg-[#222222]">
+            <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-[#F2FD84] mx-auto mb-4"></div>
+            <p className="text-sm font-body tracking-wider">
+              LOADING CLASSES...
+            </p>
+          </div>
         )}
         {error && (
-          <div className="font-body text-center py-20 text-red-500">Error: {error}</div>
+          <div className="font-body text-center py-20 text-red-500">
+            Error: {error}
+          </div>
         )}
 
         {/* Classes Grid */}

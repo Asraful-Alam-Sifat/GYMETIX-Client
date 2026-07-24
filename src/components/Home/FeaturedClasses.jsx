@@ -1,5 +1,5 @@
 "use client";
-import  { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import { MdStar } from "react-icons/md";
 import { motion } from "framer-motion";
